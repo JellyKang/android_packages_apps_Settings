@@ -5287,6 +5287,16 @@ rience. Enable at your own discretion.</string>
     <string name="status_bar_alpha_mode_always">always</string>
     <string name="status_bar_style_reset">Reset</string>
 
+     <!-- Display : Animation options -->
+    <string name="display_category_animation_options_title">Animation options</string>
+    <string name="system_power_crt_screen_off_title">CRT Screen Off</string>
+    <string name="system_power_crt_screen_off_summary">Screen will animate an Electron Beam when turned off</string>
+    <string name="system_power_crt_mode_title">CRT animation mode</string>
+    <string name="system_power_crt_mode_dialog_title">Show CRT animation</string>
+    <string name="system_power_crt_mode_horizontal">Portrait horizontal</string>
+    <string name="system_power_crt_mode_vertical">Portrait vertical</string>
+    <string name="system_power_crt_mode_both">Orientation dependent</string>
+
     <!-- **** JELLYKANG ADDITIONS END **** -->
 
 </resources>

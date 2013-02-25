@@ -69,6 +69,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String ROTATION_ANGLE_90 = "90";
     private static final String ROTATION_ANGLE_180 = "180";
     private static final String ROTATION_ANGLE_270 = "270";
+    private static final String KEY_POWER_CRT_MODE = "system_power_crt_mode";
+    private static final String KEY_POWER_CRT_SCREEN_OFF = "system_power_crt_screen_off";
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
 
@@ -77,6 +79,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mVolumeWake;
     private PreferenceScreen mDisplayRotationPreference;
     private WarnedListPreference mFontSizePref;
+    private ListPreference mCrtMode;
+    private CheckBoxPreference mCrtOn;
+    private CheckBoxPreference mCrtOff;
 
     private final Configuration mCurConfig = new Configuration();
 
@@ -93,6 +98,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             updateDisplayRotationPreferenceDescription();
         }
     };
+
+    private boolean mIsCrtOffChecked = false;
 
     private final RotationPolicy.RotationPolicyListener mRotationPolicyListener =
             new RotationPolicy.RotationPolicyListener() {
@@ -153,6 +160,26 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             }
         }
 
+        // respect device default configuration
+        // true fades while false animates
+        boolean electronBeamFadesConfig = mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_animateScreenLights);
+
+        // use this to enable/disable crt on feature
+        mIsCrtOffChecked = Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.SYSTEM_POWER_ENABLE_CRT_OFF,
+                electronBeamFadesConfig ? 0 : 1) == 1;
+
+        mCrtOff = (CheckBoxPreference) findPreference(KEY_POWER_CRT_SCREEN_OFF);
+        mCrtOff.setChecked(mIsCrtOffChecked);
+
+        mCrtMode = (ListPreference) prefSet.findPreference(KEY_POWER_CRT_MODE);
+        int crtMode = Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.SYSTEM_POWER_CRT_MODE, 0);
+        mCrtMode.setValue(String.valueOf(crtMode));
+        mCrtMode.setSummary(mCrtMode.getEntry());
+        mCrtMode.setOnPreferenceChangeListener(this);
+
     }
 
     private void updateDisplayRotationPreferenceDescription() {
@@ -197,6 +224,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             summary.append(" " + getString(R.string.display_rotation_unit));
         }
         mDisplayRotationPreference.setSummary(summary);
+       
     }
 
     private void updateTimeoutPreferenceDescription(long currentTimeout) {
@@ -388,6 +416,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_WAKE_SCREEN,
                     mVolumeWake.isChecked() ? 1 : 0);
             return true;
+        } else if (preference == mCrtOff) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.SYSTEM_POWER_ENABLE_CRT_OFF,
+                    mCrtOff.isChecked() ? 1 : 0);
+            return true;
         }
 
         return super.onPreferenceTreeClick(preferenceScreen, preference);
@@ -407,7 +440,15 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (KEY_FONT_SIZE.equals(key)) {
             writeFontSizePreference(objValue);
         }
-
+        
+        if (preference == mCrtMode) {
+            int crtMode = Integer.valueOf((String) objValue);
+            int index = mCrtMode.findIndexOfValue((String) objValue);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.SYSTEM_POWER_CRT_MODE, crtMode);
+            mCrtMode.setSummary(mCrtMode.getEntries()[index]);
+            return true;
+	}
         return true;
     }
 
