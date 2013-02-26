@@ -78,6 +78,9 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
     private File mWallpaperImage;
     private File mWallpaperTemporary;
 
+    ContentResolver resolver = getContentResolver();
+    Context mContext = getActivity();
+
     private boolean mIsPrimary;
 
     public boolean hasButtons() {
@@ -89,8 +92,6 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.lockscreen_interface_settings);
-        ContentResolver resolver = getContentResolver();
-        mContext = getActivity();
 
         // Determine which user is logged in
         mIsPrimary = UserHandle.myUserId() == UserHandle.USER_OWNER;
