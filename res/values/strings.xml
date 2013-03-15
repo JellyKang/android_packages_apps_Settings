@@ -4474,6 +4474,7 @@
 
     <!-- About phone screen,  setting option name-->
     <string name="kang_version">JellyKang version</string>
+    <string name="kang_version_default">Unknown</string>
     <string name="mod_version">CyanogenMod version</string>
     <string name="mod_version_default">Unknown</string>
     <!-- About phone screen, build date of ROM -->
