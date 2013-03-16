@@ -40,8 +40,8 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private static final String STATUS_BAR_SIGNAL = "status_bar_signal";
     private static final String STATUS_BAR_NOTIF_COUNT = "status_bar_notif_count";
     private static final String STATUS_BAR_CATEGORY_GENERAL = "status_bar_general";
-    private static final String KEY_MISSED_CALL_BREATH = "missed_call_breath";
-    private static final String KEY_MMS_BREATH = "mms_breath";
+    private static final String MISSED_CALL_BREATH = "missed_call_breath";
+    private static final String MMS_BREATH = "mms_breath";
 
 
     private ListPreference mStatusBarAmPm;
@@ -109,11 +109,11 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         mStatusBarCmSignal.setSummary(mStatusBarCmSignal.getEntry());
         mStatusBarCmSignal.setOnPreferenceChangeListener(this);
 
-        mMissedCallBreath = (CheckBoxPreference) findPreference(KEY_MISSED_CALL_BREATH);
+        mMissedCallBreath = (CheckBoxPreference) findPreference(MISSED_CALL_BREATH);
         mMissedCallBreath.setChecked(Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.MISSED_CALL_BREATH, 0) == 1);
 
-        mMMSBreath = (CheckBoxPreference) findPreference(KEY_MMS_BREATH);
+        mMMSBreath = (CheckBoxPreference) findPreference(MMS_BREATH);
         mMMSBreath.setChecked(Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.MMS_BREATH, 0) == 1);
 
@@ -168,11 +168,11 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
                     Settings.System.STATUS_BAR_CLOCK, value ? 1 : 0);
             return true;
 	} else if (preference == mMissedCallBreath) {
-            Settings.System.putInt(mContext.getContentResolver(), Settings.System.MISSED_CALL_BREATH, 
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(), Settings.System.MISSED_CALL_BREATH, 
                     mMissedCallBreath.isChecked() ? 1 : 0);
             return true;
         } else if (preference == mMMSBreath) {
-            Settings.System.putInt(mContext.getContentResolver(), Settings.System.MMS_BREATH, 
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(), Settings.System.MMS_BREATH, 
                     mMMSBreath.isChecked() ? 1 : 0);
             return true;
         } else if (preference == mStatusBarBrightnessControl) {
