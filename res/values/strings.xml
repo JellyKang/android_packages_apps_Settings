@@ -4473,8 +4473,6 @@
     <string name="device_hostname">Device hostname</string>
 
     <!-- About phone screen,  setting option name-->
-    <string name="kang_version">JellyKang version</string>
-    <string name="kang_version_default">Unknown</string>
     <string name="mod_version">CyanogenMod version</string>
     <string name="mod_version_default">Unknown</string>
     <!-- About phone screen, build date of ROM -->
@@ -5204,4 +5202,13 @@
     <string name="navring_choose_action_title">Choose action</string>
 
     <!-- **** CYANOGENMOD ADDITIONS END **** -->
+
+    <!-- **** JELLYKANG ADDITIONS BEGIN **** -->
+
+    <!-- About phone screen,  setting option name-->
+    <string name="kang_version">JellyKang version</string>
+    <string name="kang_version_default">Unknown</string>
+
+    <!-- **** JELLYKANG ADDITIONS END **** -->
+
 </resources>
