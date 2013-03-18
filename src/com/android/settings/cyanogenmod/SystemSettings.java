@@ -85,8 +85,7 @@ public class SystemSettings extends SettingsPreferenceFragment {
                 if (windowManager.hasNavigationBar()) {
                     removeKeys = true;
                 } else {
-		// Keep the NavBar enabled for people with broken hardware keys                 
-		//   removeNavbar = true;
+                    removeNavbar = true;
                 }
             } catch (RemoteException e) {
                 // Do nothing
