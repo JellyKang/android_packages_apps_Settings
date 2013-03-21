@@ -5011,12 +5011,6 @@
     <!-- Status bar notification count -->
     <string name="status_bar_notif_count_title">Show notification count</string>
     <string name="status_bar_notif_count_summary">Display number of pending notifications</string>
-	
-    <!-- Breathing SMS/Phone Notification -->
-    <string name="mms_breath">Glowing SMS</string>
-    <string name="mms_breath_summary">Glowing sms notification icon</string>
-    <string name="missed_call_breath">Glowing Missed Call</string>
-    <string name="missed_call_breath_summary">Glowing missed call notification icon</string>
 
     <!-- Wakeup options -->
     <string name="display_category_wakeup_options_title">Wakeup options</string>
@@ -5208,6 +5202,12 @@
     <!-- About phone screen,  setting option name-->
     <string name="kang_version">JellyKang version</string>
     <string name="kang_version_default">Unknown</string>
+
+    <!-- Breathing SMS/Phone Notification -->
+    <string name="mms_breath">Glowing SMS</string>
+    <string name="mms_breath_summary">Glowing sms notification icon</string>
+    <string name="missed_call_breath">Glowing Missed Call</string>
+    <string name="missed_call_breath_summary">Glowing missed call notification icon</string>
 
     <!-- **** JELLYKANG ADDITIONS END **** -->
 
