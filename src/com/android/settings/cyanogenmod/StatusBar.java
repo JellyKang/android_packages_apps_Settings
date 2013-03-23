@@ -42,6 +42,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private static final String STATUS_BAR_CATEGORY_GENERAL = "status_bar_general";
     private static final String MISSED_CALL_BREATH = "missed_call_breath";
     private static final String MMS_BREATH = "mms_breath";
+    private static final String STATUS_BAR_NOTIF_ICON_OPACITY = "status_bar_icon_opacity";
 
 
     private ListPreference mStatusBarAmPm;
@@ -53,6 +54,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private CheckBoxPreference mMissedCallBreath;
     private CheckBoxPreference mMMSBreath;
     private PreferenceCategory mPrefCategoryGeneral;
+    private ListPreference mStatusBarIconOpacity;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,6 +69,12 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         mStatusBarAmPm = (ListPreference) prefSet.findPreference(STATUS_BAR_AM_PM);
         mStatusBarBattery = (ListPreference) prefSet.findPreference(STATUS_BAR_BATTERY);
         mStatusBarCmSignal = (ListPreference) prefSet.findPreference(STATUS_BAR_SIGNAL);
+
+        mStatusBarIconOpacity = (ListPreference) prefSet.findPreference(STATUS_BAR_NOTIF_ICON_OPACITY);
+        int iconOpacity = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.STATUS_BAR_NOTIF_ICON_OPACITY, 140);
+        mStatusBarIconOpacity.setValue(String.valueOf(iconOpacity));
+        mStatusBarIconOpacity.setOnPreferenceChangeListener(this);
 
         mStatusBarClock.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.STATUS_BAR_CLOCK, 1) == 1));
@@ -147,6 +155,11 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.STATUS_BAR_BATTERY, statusBarBattery);
             mStatusBarBattery.setSummary(mStatusBarBattery.getEntries()[index]);
+            return true;
+	} else if (preference == mStatusBarIconOpacity) {
+            int iconOpacity = Integer.valueOf((String) newValue);
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.STATUS_BAR_NOTIF_ICON_OPACITY, iconOpacity);
             return true;
         } else if (preference == mStatusBarCmSignal) {
             int signalStyle = Integer.valueOf((String) newValue);

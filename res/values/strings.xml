@@ -5211,6 +5211,10 @@
     <string name="missed_call_breath">Glowing Missed Call</string>
     <string name="missed_call_breath_summary">Glowing missed call notification icon</string>
 
+<!-- Status bar notification icon opacity -->
+    <string name="status_bar_icon_opacity">Notification icon opacity</string>
+    <string name="status_bar_icon_opacity_summary">Sets opacity of status bar notification icons</string>
+
     <!-- **** JELLYKANG ADDITIONS END **** -->
 
 </resources>
