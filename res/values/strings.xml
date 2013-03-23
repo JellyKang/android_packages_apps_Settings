@@ -5094,11 +5094,11 @@
     <string name="summary_quick_pulldown">%1$s edge of the status bar pulls down Quick Settings</string>
     <string name="quick_pulldown_summary_left">Left</string>
     <string name="quick_pulldown_summary_right">Right</string>
-    <string name="quick_pulldown_summary_auto">Show when no notifications</string>
+    <string name="quick_pulldown_summary_auto">When no notifications</string>
     <string name="quick_pulldown_off">Off</string>
     <string name="quick_pulldown_left">Left</string>
     <string name="quick_pulldown_right">Right</string>
-    <string name="quick_pulldown_auto">Auto (when no notifications)</string>
+    <string name="quick_pulldown_auto">Auto</string>
     <string name="title_collapse_panel">Auto close panel</string>
     <string name="summary_collapse_panel">Close the Quick Settings panel upon toggle</string>
 

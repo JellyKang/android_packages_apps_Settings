@@ -342,6 +342,10 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
         if (value == 0) {
             /* quick pulldown deactivated */
             mQuickPulldown.setSummary(res.getString(R.string.quick_pulldown_off));
+        }
+        if (value == 3) {
+            /* Auto quick pulldown */
+            mQuickPulldown.setSummary(res.getString(R.string.quick_pulldown_summary_auto));
         } else {
             String direction = res.getString(value == 2
                     ? R.string.quick_pulldown_summary_left
