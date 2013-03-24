@@ -126,6 +126,7 @@ public class Settings extends PreferenceActivity
             R.id.interface_section,
             R.id.launcher_settings,
             R.id.lock_screen_settings,
+	    R.id.aokp_performance,
             R.id.system_settings
     };
 
