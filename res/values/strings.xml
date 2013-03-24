@@ -4689,7 +4689,7 @@
     <string name="slide_lock_delay_30m">30 minutes</string>
 
     <!-- Performance settings  -->
-    <string name="performance_settings_title">Performance</string>
+    <string name="performance_settings_title">CM Performance</string>
 
     <!-- Performance Settings : Warning dialog  -->
     <string name="performance_settings_warning_title">Proceed with Caution</string>
@@ -5205,6 +5205,8 @@
     <string name="kang_version">JellyKang version</string>
     <string name="kang_version_default">Unknown</string>
 
+    <string name="header_category_kang">Kangaroo!</string>
+
     <!-- Breathing SMS/Phone Notification -->
     <string name="mms_breath">Glowing SMS</string>
     <string name="mms_breath_summary">Glowing sms notification icon</string>
@@ -5215,7 +5217,7 @@
     <string name="status_bar_icon_opacity">Notification icon opacity</string>
     <string name="status_bar_icon_opacity_summary">Sets opacity of status bar notification icons</string>
 
-    <string name="aokp_performance_title">AOKP Performance Control</string>
+    <string name="aokp_performance_title">AOKP PerformanceControl</string>
 
     <!-- **** JELLYKANG ADDITIONS END **** -->
 
