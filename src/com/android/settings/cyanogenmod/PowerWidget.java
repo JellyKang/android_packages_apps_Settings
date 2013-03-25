@@ -80,16 +80,6 @@ public class PowerWidget extends SettingsPreferenceFragment implements
 
     @Override
 
-    private void updateCustomLabelTextSummary() {
-        mCustomLabelText = Settings.System.getString(getActivity().getContentResolver(),
-                Settings.System.CUSTOM_CARRIER_LABEL);
-        if (mCustomLabelText == null || mCustomLabelText.length() == 0) {
-            mCustomLabel.setSummary(R.string.custom_carrier_label_notset);
-        } else {
-            mCustomLabel.setSummary(mCustomLabelText);
-        }
-    }
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -124,6 +114,16 @@ public class PowerWidget extends SettingsPreferenceFragment implements
             mPowerWidgetHapticFeedback.setValue(Integer.toString(Settings.System.getInt(
                     getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.EXPANDED_HAPTIC_FEEDBACK, 2)));
+        }
+    }
+
+    private void updateCustomLabelTextSummary() {
+        mCustomLabelText = Settings.System.getString(getActivity().getContentResolver(),
+                Settings.System.CUSTOM_CARRIER_LABEL);
+        if (mCustomLabelText == null || mCustomLabelText.length() == 0) {
+            mCustomLabel.setSummary(R.string.custom_carrier_label_notset);
+        } else {
+            mCustomLabel.setSummary(mCustomLabelText);
         }
     }
 
@@ -360,7 +360,36 @@ public class PowerWidget extends SettingsPreferenceFragment implements
                                         .getApplicationContext()), PowerWidgetUtil
                                         .getButtonStringFromList(buttonList)));
                 return true;
-            }
+		} else if (preference == mCustomLabel) {
+				    AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+				    alert.setTitle(R.string.custom_carrier_label_title);
+				    alert.setMessage(R.string.custom_carrier_label_explain);
+
+				    // Set an EditText view to get user input
+				    final EditText input = new EditText(getActivity());
+				    input.setText(mCustomLabelText != null ? mCustomLabelText : "");
+				    alert.setView(input);
+				    alert.setPositiveButton(getResources().getString(R.string.ok),
+					    new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+					    String value = ((Spannable) input.getText()).toString();
+					    Settings.System.putString(getActivity().getContentResolver(),
+						    Settings.System.CUSTOM_CARRIER_LABEL, value);
+					    updateCustomLabelTextSummary();
+					    Intent i = new Intent();
+					    i.setAction("com.android.settings.LABEL_CHANGED");
+					    mContext.sendBroadcast(i);
+					}
+				    });
+				    alert.setNegativeButton(getResources().getString(R.string.cancel),
+					    new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+					    // Canceled.
+					}
+				    });
+
+				    alert.show();
+			}
 
             return false;
         }
@@ -411,36 +440,7 @@ public class PowerWidget extends SettingsPreferenceFragment implements
                 Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                         Settings.System.EXPANDED_FLASH_MODE, value);
                 mFlashMode.setSummary(mFlashMode.getEntries()[index]);
-            } else if (preference == mCustomLabel) {
-		    AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-		    alert.setTitle(R.string.custom_carrier_label_title);
-		    alert.setMessage(R.string.custom_carrier_label_explain);
-
-		    // Set an EditText view to get user input
-		    final EditText input = new EditText(getActivity());
-		    input.setText(mCustomLabelText != null ? mCustomLabelText : "");
-		    alert.setView(input);
-		    alert.setPositiveButton(getResources().getString(R.string.ok),
-		            new DialogInterface.OnClickListener() {
-		        public void onClick(DialogInterface dialog, int whichButton) {
-		            String value = ((Spannable) input.getText()).toString();
-		            Settings.System.putString(getActivity().getContentResolver(),
-		                    Settings.System.CUSTOM_CARRIER_LABEL, value);
-		            updateCustomLabelTextSummary();
-		            Intent i = new Intent();
-		            i.setAction("com.android.settings.LABEL_CHANGED");
-		            mContext.sendBroadcast(i);
-		        }
-		    });
-		    alert.setNegativeButton(getResources().getString(R.string.cancel),
-		            new DialogInterface.OnClickListener() {
-		        public void onClick(DialogInterface dialog, int whichButton) {
-		            // Canceled.
-		        }
-		    });
-
-		    alert.show();
-	}
+            }
             return true;
         }
 
