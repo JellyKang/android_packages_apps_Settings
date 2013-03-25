@@ -5214,6 +5214,10 @@
 
     <string name="header_category_kang">Kangaroo!</string>
 
+    <string name="custom_carrier_label_title">Custom carrier label</string>
+    <string name="custom_carrier_label_explain">Please enter a new label. Enter an empty to revert to jellykang label.</string>
+    <string name="custom_carrier_label_notset">JellyKang</string>
+
     <!-- Breathing SMS/Phone Notification -->
     <string name="mms_breath">Glowing SMS</string>
     <string name="mms_breath_summary">Glowing sms notification icon</string>
@@ -5224,7 +5228,7 @@
     <string name="status_bar_icon_opacity">Notification icon opacity</string>
     <string name="status_bar_icon_opacity_summary">Sets opacity of status bar notification icons</string>
 
-    <string name="aokp_performance_title">AOKP PerformanceControl</string>
+    <string name="aokp_performance_title">PerformanceControl</string>
 
     <!-- **** JELLYKANG ADDITIONS END **** -->
 

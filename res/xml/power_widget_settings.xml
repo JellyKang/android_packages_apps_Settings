@@ -17,6 +17,10 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+         <PreferenceScreen
+            android:key="custom_carrier_label"
+            android:title="@string/custom_carrier_label_title" />
+
     <!-- Notification drawer Power Widget -->
     <PreferenceCategory
        android:title="@string/power_widget_title">

@@ -48,6 +48,13 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.text.Spannable;
+import android.widget.EditText;
 
 import com.android.internal.telephony.Phone;
 import com.android.settings.R;
@@ -61,11 +68,15 @@ public class PowerWidget extends SettingsPreferenceFragment implements
     private static final String UI_EXP_WIDGET_HIDE_ONCHANGE = "expanded_hide_onchange";
     private static final String UI_EXP_WIDGET_HIDE_SCROLLBAR = "expanded_hide_scrollbar";
     private static final String UI_EXP_WIDGET_HAPTIC_FEEDBACK = "expanded_haptic_feedback";
+    private static final String PREF_CUSTOM_CARRIER_LABEL = "custom_carrier_label";
 
     private CheckBoxPreference mPowerWidget;
     private CheckBoxPreference mPowerWidgetHideOnChange;
     private CheckBoxPreference mPowerWidgetHideScrollBar;
     private ListPreference mPowerWidgetHapticFeedback;
+    private Preference mCustomLabel;
+    private String mCustomLabelText = null;
+    private int newDensityValue;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,6 +86,9 @@ public class PowerWidget extends SettingsPreferenceFragment implements
             addPreferencesFromResource(R.xml.power_widget_settings);
 
             PreferenceScreen prefSet = getPreferenceScreen();
+
+       	    mCustomLabel = findPreference(PREF_CUSTOM_CARRIER_LABEL);
+            updateCustomLabelTextSummary();
 
             mPowerWidget = (CheckBoxPreference) prefSet.findPreference(UI_EXP_WIDGET);
             mPowerWidgetHideOnChange = (CheckBoxPreference) prefSet
@@ -311,6 +325,16 @@ public class PowerWidget extends SettingsPreferenceFragment implements
             }
         }
 
+    private void updateCustomLabelTextSummary() {
+        mCustomLabelText = Settings.System.getString(getActivity().getContentResolver(),
+                Settings.System.CUSTOM_CARRIER_LABEL);
+        if (mCustomLabelText == null || mCustomLabelText.length() == 0) {
+            mCustomLabel.setSummary(R.string.custom_carrier_label_notset);
+        } else {
+            mCustomLabel.setSummary(mCustomLabelText);
+        }
+    }
+
         public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
                 Preference preference) {
             // we only modify the button list if it was one of our checks that
@@ -386,7 +410,36 @@ public class PowerWidget extends SettingsPreferenceFragment implements
                 Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                         Settings.System.EXPANDED_FLASH_MODE, value);
                 mFlashMode.setSummary(mFlashMode.getEntries()[index]);
-            }
+            } else if (preference == mCustomLabel) {
+		    AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+		    alert.setTitle(R.string.custom_carrier_label_title);
+		    alert.setMessage(R.string.custom_carrier_label_explain);
+
+		    // Set an EditText view to get user input
+		    final EditText input = new EditText(getActivity());
+		    input.setText(mCustomLabelText != null ? mCustomLabelText : "");
+		    alert.setView(input);
+		    alert.setPositiveButton(getResources().getString(R.string.ok),
+		            new DialogInterface.OnClickListener() {
+		        public void onClick(DialogInterface dialog, int whichButton) {
+		            String value = ((Spannable) input.getText()).toString();
+		            Settings.System.putString(getActivity().getContentResolver(),
+		                    Settings.System.CUSTOM_CARRIER_LABEL, value);
+		            updateCustomLabelTextSummary();
+		            Intent i = new Intent();
+		            i.setAction("com.android.settings.LABEL_CHANGED");
+		            mContext.sendBroadcast(i);
+		        }
+		    });
+		    alert.setNegativeButton(getResources().getString(R.string.cancel),
+		            new DialogInterface.OnClickListener() {
+		        public void onClick(DialogInterface dialog, int whichButton) {
+		            // Canceled.
+		        }
+		    });
+
+		    alert.show();
+	}
             return true;
         }
 
