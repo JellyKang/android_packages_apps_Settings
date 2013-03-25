@@ -5215,8 +5215,8 @@
     <string name="header_category_kang">Kangaroo!</string>
 
     <string name="custom_carrier_label_title">Custom carrier label</string>
-    <string name="custom_carrier_label_explain">Please enter a new label. Enter an empty to revert to jellykang label.</string>
-    <string name="custom_carrier_label_notset">JellyKang</string>
+    <string name="custom_carrier_label_explain">Please enter a new label Or leave blank for stock.</string>
+    <string name="custom_carrier_label_notset">Set a Custom Carrier Label</string>
 
     <!-- Breathing SMS/Phone Notification -->
     <string name="mms_breath">Glowing SMS</string>
