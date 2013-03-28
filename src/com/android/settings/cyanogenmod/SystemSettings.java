@@ -155,11 +155,13 @@ public class SystemSettings extends SettingsPreferenceFragment {
             mPieControl = null;
         }
 
+	PreferenceCategory NavBarCategory = (PreferenceCategory) prefSet.findPreference(
+                KEY_NAVIGATION_BAR_CATEGORY);
 	if(Settings.System.getBoolean(getActivity().getContentResolver(),
                 Settings.System.NAVIGATION_BAR_SHOW, hasNavBarByDefault) == false){
 	//Don't show NavBar customization if the navbar isn't enabled
-		prefScreen.removePreference(findPreference(KEY_NAVIGATION_RING));
-		prefScreen.removePreference(findPreference(KEY_NAVIGATION_BAR));
+		NavBarCategory.removePreference(findPreference(KEY_NAVIGATION_RING));
+		NavBarCategory.removePreference(findPreference(KEY_NAVIGATION_BAR));
 	}
 
 /**
