@@ -22,10 +22,20 @@ import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
+import android.preference.CheckBoxPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceActivity;
+import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
+import android.widget.Toast;
+import android.preference.PreferenceScreen;
 import android.util.Log;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.view.IWindowManager;
 
 import com.android.settings.R;
@@ -40,6 +50,7 @@ public class SystemSettings extends SettingsPreferenceFragment {
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
     private static final String KEY_BATTERY_LIGHT = "battery_light";
     private static final String KEY_HARDWARE_KEYS = "hardware_keys";
+    private static final String ENABLE_NAVIGATION_BAR = "enable_nav_bar";
     private static final String KEY_NAVIGATION_BAR = "navigation_bar";
     private static final String KEY_NAVIGATION_RING = "navigation_ring";
     private static final String KEY_NAVIGATION_BAR_CATEGORY = "navigation_bar_category";
@@ -53,6 +64,7 @@ public class SystemSettings extends SettingsPreferenceFragment {
     private PreferenceScreen mNotificationPulse;
     private PreferenceScreen mBatteryPulse;
     private PreferenceScreen mPieControl;
+    CheckBoxPreference mEnableNavigationBar;
     private boolean mIsPrimary;
 
     @Override
@@ -71,14 +83,23 @@ public class SystemSettings extends SettingsPreferenceFragment {
                 ServiceManager.getService(Context.WINDOW_SERVICE));
         try {
             if (windowManager.hasNavigationBar()) {
-                removeKeys = true;
-            } else {
-		// Keep the NavBar enabled for people with broken hardware keys                
+                // removeKeys = true;
+            } else {                
+		// Keep the NavBar enabled for people with broken hardware keys		
 		//removeNavbar = true;
             }
         } catch (RemoteException e) {
             // Do nothing
         }
+
+	boolean hasNavBarByDefault = getResources().getBoolean(
+                com.android.internal.R.bool.config_showNavigationBar);
+        mEnableNavigationBar = (CheckBoxPreference) getPreferenceScreen().findPreference(ENABLE_NAVIGATION_BAR);
+	mEnableNavigationBar.setChecked(Settings.System.getBoolean(getActivity().getContentResolver(),
+                Settings.System.NAVIGATION_BAR_SHOW, hasNavBarByDefault));
+        //mEnableNavigationBar.setChecked(getResources().getBoolean(com.android.internal.R.bool.config_showNavigationBar));
+      // mEnableNavigationBar.setChecked(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.NAVIGATION_BAR_SHOW, 0) == 1);
+	// mEnableNavigationBar.setChecked(getBoolean(getActivity().getContentResolver(), Settings.System.NAVIGATION_BAR_SHOW, 0) == 1);
 
         // Determine which user is logged in
         mIsPrimary = UserHandle.myUserId() == UserHandle.USER_OWNER;
@@ -134,8 +155,25 @@ public class SystemSettings extends SettingsPreferenceFragment {
             mPieControl = null;
         }
 
+/**
+mDynamicBugReport = (CheckBoxPreference) prefSet.findPreference(DYNAMIC_BUGREPORT);
+        mDynamicBugReport.setChecked(Settings.System.getInt(resolver, Settings.System.QS_DYNAMIC_BUGREPORT, 1) == 1);
+**/
+
         // Don't display the lock clock preference if its not installed
         removePreferenceIfPackageNotInstalled(findPreference(KEY_LOCK_CLOCK));
+    }
+
+@Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if (preference == mEnableNavigationBar) {
+            Settings.System.putBoolean(getActivity().getApplicationContext().getContentResolver(), Settings.System.NAVIGATION_BAR_SHOW, ((CheckBoxPreference) preference).isChecked() ? true : false);
+	//boolean value = mEnableNavigationBar.isChecked();
+	//Bundle.putBoolean(com.android.internal.R.bool.config_showNavigationBar, value ? true : false);
+            //Helpers.restartSystemUI();
+            return true;
+        }
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
     @Override
