@@ -157,7 +157,7 @@ public class SystemSettings extends SettingsPreferenceFragment {
 
 	if (!mEnableNavigationBar.isChecked()){
 	//Don't show NavBar customization if the navbar isn't enabled
-		prefScreen.removePreference(KEY_NAVIGATION_RING);
+		prefScreen.removePreference(findPreference(KEY_NAVIGATION_RING));
 		prefScreen.removePreference(findPreference(KEY_NAVIGATION_BAR));
 	}
 
