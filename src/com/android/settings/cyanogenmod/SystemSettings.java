@@ -155,6 +155,12 @@ public class SystemSettings extends SettingsPreferenceFragment {
             mPieControl = null;
         }
 
+	if (!mEnableNavigationBar.isChecked()){
+	//Don't show NavBar customization if the navbar isn't enabled
+		prefScreen.removePreference(KEY_NAVIGATION_RING);
+		prefScreen.removePreference(findPreference(KEY_NAVIGATION_BAR));
+	}
+
 /**
 mDynamicBugReport = (CheckBoxPreference) prefSet.findPreference(DYNAMIC_BUGREPORT);
         mDynamicBugReport.setChecked(Settings.System.getInt(resolver, Settings.System.QS_DYNAMIC_BUGREPORT, 1) == 1);
@@ -171,6 +177,8 @@ mDynamicBugReport = (CheckBoxPreference) prefSet.findPreference(DYNAMIC_BUGREPOR
 	//boolean value = mEnableNavigationBar.isChecked();
 	//Bundle.putBoolean(com.android.internal.R.bool.config_showNavigationBar, value ? true : false);
             //Helpers.restartSystemUI();
+	    Toast.makeText(getActivity(), "Restart system to make changes take effect",
+                        Toast.LENGTH_LONG).show();
             return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
