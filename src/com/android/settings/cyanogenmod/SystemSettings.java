@@ -155,7 +155,7 @@ public class SystemSettings extends SettingsPreferenceFragment {
             mPieControl = null;
         }
 
-	PreferenceCategory NavBarCategory = (PreferenceCategory) prefSet.findPreference(
+	PreferenceCategory NavBarCategory = (PreferenceCategory) findPreference(
                 KEY_NAVIGATION_BAR_CATEGORY);
 	if(Settings.System.getBoolean(getActivity().getContentResolver(),
                 Settings.System.NAVIGATION_BAR_SHOW, hasNavBarByDefault) == false){
