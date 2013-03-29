@@ -28,6 +28,7 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceGroup;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.widget.Toast;
@@ -154,7 +155,6 @@ public class SystemSettings extends SettingsPreferenceFragment {
             prefScreen.removePreference(mPieControl);
             mPieControl = null;
         }
-
 	PreferenceCategory NavBarCategory = (PreferenceCategory) findPreference(
                 KEY_NAVIGATION_BAR_CATEGORY);
 	if(Settings.System.getBoolean(getActivity().getContentResolver(),
