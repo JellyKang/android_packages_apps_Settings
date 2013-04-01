@@ -42,6 +42,11 @@
         android:entryValues="@array/lockscreen_battery_status_values"
         android:defaultValue="0" />
 
+      <CheckBoxPreference
+        android:key="see_through"
+        android:title="@string/lockscreen_seethrough"
+        android:summary="@string/lockscreen_seethrough_summary" />
+
     <!-- Lock clock -->
     <PreferenceScreen
         android:key="lock_clock"

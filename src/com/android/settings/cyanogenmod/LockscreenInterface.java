@@ -23,6 +23,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -60,10 +61,12 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
     private static final String KEY_LOCKSCREEN_BUTTONS = "lockscreen_buttons";
     private static final String KEY_LOCKSCREEN_MAXIMIZE_WIDGETS = "lockscreen_maximize_widgets";
     private static final String KEY_BACKGROUND = "lockscreen_background";
+    private static final String KEY_SEE_TRHOUGH = "see_through";
     private static final String KEY_SCREEN_SECURITY = "screen_security";
 
     private ListPreference mCustomBackground;
     private ListPreference mBatteryStatus;
+    private CheckBoxPreference mSeeThrough;
     private CheckBoxPreference mMaximizeWidgets;
 
     private File mWallpaperImage;
@@ -80,6 +83,8 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.lockscreen_interface_settings);
+        ContentResolver resolver = getContentResolver();
+        mContext = getActivity();
 
         // Determine which user is logged in
         mIsPrimary = UserHandle.myUserId() == UserHandle.USER_OWNER;
@@ -110,6 +115,10 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
             prefScreen.removePreference(findPreference(KEY_LOCKSCREEN_BUTTONS));
             prefScreen.removePreference(findPreference(KEY_LOCKSCREEN_MAXIMIZE_WIDGETS));
         }
+
+        mSeeThrough = (CheckBoxPreference) findPreference(KEY_SEE_TRHOUGH);
+        mSeeThrough.setChecked(Settings.System.getInt(resolver,
+                Settings.System.LOCKSCREEN_SEE_THROUGH, 0) == 1);
 
         // This applies to all users
         mCustomBackground = (ListPreference) findPreference(KEY_BACKGROUND);
@@ -201,6 +210,16 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
             return handleBackgroundSelection(selection);
         }
         return false;
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+	if (preference == mSeeThrough) {
+            Settings.System.putInt(mContext.getContentResolver(), Settings.System.LOCKSCREEN_SEE_THROUGH, 
+                    mSeeThrough.isChecked() ? 1 : 0);
+            return true;
+        }
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
     private boolean handleBackgroundSelection(int selection) {
