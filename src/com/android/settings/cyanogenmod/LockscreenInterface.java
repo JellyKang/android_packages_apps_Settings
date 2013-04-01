@@ -47,6 +47,8 @@ import com.android.settings.Utils;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.notificationlight.ColorPickerView;
 
+import net.margaritov.preference.colorpicker.ColorPickerPreference;
+
 public class LockscreenInterface extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "LockscreenInterface";
@@ -63,11 +65,15 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
     private static final String KEY_BACKGROUND = "lockscreen_background";
     private static final String KEY_SEE_TRHOUGH = "see_through";
     private static final String KEY_SCREEN_SECURITY = "screen_security";
+    private static final String PREF_LOCKSCREEN_AUTO_ROTATE = "lockscreen_auto_rotate";
+    private static final String PREF_LOCKSCREEN_TEXT_COLOR = "lockscreen_text_color";
 
     private ListPreference mCustomBackground;
     private ListPreference mBatteryStatus;
     private CheckBoxPreference mSeeThrough;
     private CheckBoxPreference mMaximizeWidgets;
+    ColorPickerPreference mLockscreenTextColor;
+    CheckBoxPreference mLockscreenAutoRotate;
 
     private File mWallpaperImage;
     private File mWallpaperTemporary;
@@ -119,6 +125,13 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
         mSeeThrough = (CheckBoxPreference) findPreference(KEY_SEE_TRHOUGH);
         mSeeThrough.setChecked(Settings.System.getInt(resolver,
                 Settings.System.LOCKSCREEN_SEE_THROUGH, 0) == 1);
+
+        mLockscreenAutoRotate = (CheckBoxPreference)findPreference(PREF_LOCKSCREEN_AUTO_ROTATE);
+        mLockscreenAutoRotate.setChecked(Settings.System.getBoolean(mContext.getContentResolver(),
+                Settings.System.LOCKSCREEN_AUTO_ROTATE, false));
+
+        mLockscreenTextColor = (ColorPickerPreference) findPreference(PREF_LOCKSCREEN_TEXT_COLOR);
+        mLockscreenTextColor.setOnPreferenceChangeListener(this);
 
         // This applies to all users
         mCustomBackground = (ListPreference) findPreference(KEY_BACKGROUND);
@@ -208,7 +221,13 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
         } else if (preference == mCustomBackground) {
             int selection = mCustomBackground.findIndexOfValue(objValue.toString());
             return handleBackgroundSelection(selection);
-        }
+        } else if (preference == mLockscreenTextColor) {
+            String hex = ColorPickerPreference.convertToARGB(Integer.valueOf(String.valueOf(objValue)));
+            preference.setSummary(hex);
+            int intHex = ColorPickerPreference.convertToColorInt(hex);
+            Settings.System.putInt(cr, Settings.System.LOCKSCREEN_CUSTOM_TEXT_COLOR, intHex);
+            return true;        
+	}
         return false;
     }
 
@@ -217,6 +236,11 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
 	if (preference == mSeeThrough) {
             Settings.System.putInt(mContext.getContentResolver(), Settings.System.LOCKSCREEN_SEE_THROUGH, 
                     mSeeThrough.isChecked() ? 1 : 0);
+            return true;
+        } else if (preference == mLockscreenAutoRotate) {
+            Settings.System.putBoolean(mContext.getContentResolver(),
+                Settings.System.LOCKSCREEN_AUTO_ROTATE,
+                ((CheckBoxPreference) preference).isChecked());
             return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
