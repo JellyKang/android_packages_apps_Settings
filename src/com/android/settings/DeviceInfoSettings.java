@@ -242,12 +242,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment {
                 }
             }
         } else if (preference.getKey().equals(KEY_KANG_VERSION)) {
-            System.arraycopy(mHits, 1, mHits, 0, mHits.length-1);
-            mHits[mHits.length-1] = SystemClock.uptimeMillis();
-            if (mHits[0] >= (SystemClock.uptimeMillis()-500)) {
-		Toast.makeText(getActivity(), "Kangaroo!",
-                        Toast.LENGTH_LONG).show();
-            }
+		Toast.makeText(getActivity(), "Kangaroo!", Toast.LENGTH_LONG).show();
         } else if (preference.getKey().equals(KEY_MOD_VERSION)) {
             System.arraycopy(mHits, 1, mHits, 0, mHits.length-1);
             mHits[mHits.length-1] = SystemClock.uptimeMillis();
