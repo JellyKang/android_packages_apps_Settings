@@ -247,7 +247,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
                 ((CheckBoxPreference) preference).isChecked());
             return true;
         } else if (preference == mLockscreenAllWidgets) {
-            Settings.System.putBoolean(mContext.getContentResolver(),
+            Settings.System.putBoolean(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.LOCKSCREEN_ALL_WIDGETS,
                     ((CheckBoxPreference) preference).isChecked());
             return true;
