@@ -67,6 +67,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
     private static final String KEY_SCREEN_SECURITY = "screen_security";
     private static final String PREF_LOCKSCREEN_AUTO_ROTATE = "lockscreen_auto_rotate";
     private static final String PREF_LOCKSCREEN_TEXT_COLOR = "lockscreen_text_color";
+    private static final String PREF_LOCKSCREEN_ALL_WIDGETS = "lockscreen_all_widgets";
 
     private ListPreference mCustomBackground;
     private ListPreference mBatteryStatus;
@@ -74,6 +75,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
     private CheckBoxPreference mMaximizeWidgets;
     ColorPickerPreference mLockscreenTextColor;
     CheckBoxPreference mLockscreenAutoRotate;
+    CheckBoxPreference mLockscreenAllWidgets;
 
     private File mWallpaperImage;
     private File mWallpaperTemporary;
@@ -130,6 +132,10 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
 
         mLockscreenTextColor = (ColorPickerPreference) findPreference(PREF_LOCKSCREEN_TEXT_COLOR);
         mLockscreenTextColor.setOnPreferenceChangeListener(this);
+
+        mLockscreenAllWidgets = (CheckBoxPreference)findPreference(PREF_LOCKSCREEN_ALL_WIDGETS);
+        mLockscreenAllWidgets.setChecked(Settings.System.getBoolean(getActivity().getContentResolver(),
+                Settings.System.LOCKSCREEN_ALL_WIDGETS, false));
 
         // This applies to all users
         mCustomBackground = (ListPreference) findPreference(KEY_BACKGROUND);
@@ -239,6 +245,11 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
             Settings.System.putBoolean(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.LOCKSCREEN_AUTO_ROTATE,
                 ((CheckBoxPreference) preference).isChecked());
+            return true;
+        } else if (preference == mLockscreenAllWidgets) {
+            Settings.System.putBoolean(mContext.getContentResolver(),
+                    Settings.System.LOCKSCREEN_ALL_WIDGETS,
+                    ((CheckBoxPreference) preference).isChecked());
             return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
