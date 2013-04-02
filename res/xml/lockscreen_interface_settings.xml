@@ -50,7 +50,7 @@
      <net.margaritov.preference.colorpicker.ColorPickerPreference
         android:key="lockscreen_text_color"
         android:title="@string/lockscreen_text_color_title"
-        android:defaultValue="#ffffffff" />
+        android:defaultValue="0xff33be5e" />
 
       <CheckBoxPreference
         android:key="lockscreen_auto_rotate"
