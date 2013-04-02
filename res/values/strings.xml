@@ -5235,7 +5235,7 @@
     <string name="lockscreen_auto_rotate_summary">Lockscreen will have ability to rotate via device orientation. This is independent of Auto-rotation in display</string>
     <string name="lockscreen_text_color_title">Lockscreen text color</string>
     <string name="lockscreen_all_widgets_title">Allow all widgets</string>
-+    <string name="lockscreen_all_widgets_summary">Warning: Some widgets are not intended to be used on the lockscreen and may look funky.</string>
+    <string name="lockscreen_all_widgets_summary">Warning: Some widgets are not intended to be used on the lockscreen and may look funky.</string>
 
     <!-- **** JELLYKANG ADDITIONS END **** -->
 
