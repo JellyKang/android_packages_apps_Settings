@@ -78,9 +78,6 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
     private File mWallpaperImage;
     private File mWallpaperTemporary;
 
-    ContentResolver resolver = getContentResolver();
-    Context mContext = getActivity();
-
     private boolean mIsPrimary;
 
     public boolean hasButtons() {
@@ -124,11 +121,11 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
         }
 
         mSeeThrough = (CheckBoxPreference) findPreference(KEY_SEE_TRHOUGH);
-        mSeeThrough.setChecked(Settings.System.getInt(resolver,
+        mSeeThrough.setChecked(Settings.System.getInt(getContentResolver(),
                 Settings.System.LOCKSCREEN_SEE_THROUGH, 0) == 1);
 
         mLockscreenAutoRotate = (CheckBoxPreference)findPreference(PREF_LOCKSCREEN_AUTO_ROTATE);
-        mLockscreenAutoRotate.setChecked(Settings.System.getBoolean(mContext.getContentResolver(),
+        mLockscreenAutoRotate.setChecked(Settings.System.getBoolean(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.LOCKSCREEN_AUTO_ROTATE, false));
 
         mLockscreenTextColor = (ColorPickerPreference) findPreference(PREF_LOCKSCREEN_TEXT_COLOR);
@@ -235,11 +232,11 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
 	if (preference == mSeeThrough) {
-            Settings.System.putInt(mContext.getContentResolver(), Settings.System.LOCKSCREEN_SEE_THROUGH, 
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(), Settings.System.LOCKSCREEN_SEE_THROUGH, 
                     mSeeThrough.isChecked() ? 1 : 0);
             return true;
         } else if (preference == mLockscreenAutoRotate) {
-            Settings.System.putBoolean(mContext.getContentResolver(),
+            Settings.System.putBoolean(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.LOCKSCREEN_AUTO_ROTATE,
                 ((CheckBoxPreference) preference).isChecked());
             return true;
