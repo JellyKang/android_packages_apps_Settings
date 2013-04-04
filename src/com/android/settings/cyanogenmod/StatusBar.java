@@ -319,7 +319,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
 	         final float defaultStatAlpha = Settings.System.getFloat(getActivity()
 	                 .getContentResolver(), Settings.System.STATUS_BAR_ALPHA,
 	                 0.8f);
-	         mNavBarAlpha.setInitValue(Math.round(defaultStatAlpha * 100));
+	         mStatBarAlpha.setInitValue(Math.round(defaultStatAlpha * 100));
         }
     }
 
