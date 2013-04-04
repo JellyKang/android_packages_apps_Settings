@@ -26,11 +26,23 @@ import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 import android.util.Log;
+import android.view.View.OnClickListener;
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.FragmentTransaction;
+import android.app.ListFragment;
+
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.res.Resources;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.widget.SeekBarPreference;
 
 public class StatusBar extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
 
@@ -57,6 +69,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private ListPreference mBatteryBarThickness;
     private CheckBoxPreference mBatteryBarChargingAnimation;
     private ColorPickerPreference mBatteryBarColor;
+    SeekBarPreference mStatBarAlpha;
 
     private ListPreference mStatusBarAmPm;
     private ListPreference mStatusBarCmSignal;
@@ -181,6 +194,9 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
 
         updateBatteryBarOptions();
 
+        mStatBarAlpha = (SeekBarPreference) findPreference("status_bar_alpha");
+        mStatBarAlpha.setOnPreferenceChangeListener(this);
+
         mPrefCategoryGeneral = (PreferenceCategory) findPreference(STATUS_BAR_CATEGORY_GENERAL);
 
         if (Utils.isWifiOnly(getActivity())) {
@@ -212,6 +228,12 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
             int iconOpacity = Integer.valueOf((String) newValue);
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.STATUS_BAR_NOTIF_ICON_OPACITY, iconOpacity);
+            return true;
+       } else if (preference == mStatBarAlpha) {
+           float val = (float) (Integer.parseInt((String)newValue) * 0.01);
+           Settings.System.putFloat(getActivity().getContentResolver(),
+                   Settings.System.STATUS_BAR_ALPHA,
+                   val);
             return true;
         } else if (preference == mStatusBarCmSignal) {
             int signalStyle = Integer.valueOf((String) newValue);
@@ -288,6 +310,17 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+	if(mStatBarAlpha != null) {
+	         final float defaultStatAlpha = Settings.System.getFloat(getActivity()
+	                 .getContentResolver(), Settings.System.STATUS_BAR_ALPHA,
+	                 0.8f);
+	         mNavBarAlpha.setInitValue(Math.round(defaultStatAlpha * 100));
+        }
     }
 
     private void updateBatteryBarOptions() {
