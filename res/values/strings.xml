@@ -5259,9 +5259,6 @@
     <string name="lockscreen_all_widgets_title">Allow all widgets</string>
     <string name="lockscreen_all_widgets_summary">Warning: Some widgets are not intended to be used on the lockscreen and may look funky.</string>
 
-    <string name="status_bar_alpha_title">Statusbar Transparency</string>
-    <string name="status_bar_alpha_summary">On homescreen and lockscreen only.</string>
-
     <!-- Battery Icon and Bar -->
     <string name="status_bar_battery_icon_bar_title">Battery icon and bar style</string>
     <string name="battery_icon_cat">Battery Bar</string>
