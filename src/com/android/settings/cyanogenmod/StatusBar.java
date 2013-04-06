@@ -36,7 +36,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.android.settings.R;
-import com.android.settings.util.Helpers;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
@@ -232,7 +231,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         mStatusbarTransparency.setInitValue((int) (statBarTransparency * 100));
         mStatusbarTransparency.setOnPreferenceChangeListener(this);
 
-        mAlphaMode = (ListPreference) prefs.findPreference(PREF_STATUS_BAR_ALPHA_MODE);
+        mAlphaMode = (ListPreference) prefSet.findPreference(PREF_STATUS_BAR_ALPHA_MODE);
         int alphaMode = Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.STATUS_BAR_ALPHA_MODE, 1);
         mAlphaMode.setValue(String.valueOf(alphaMode));
