@@ -5253,10 +5253,6 @@
 
     <string name="aokp_performance_title">PerformanceControl</string>
 
- <!-- Lockscreen See Through -->
-   <string name="lockscreen_seethrough">Lockscreen Transparent</string>
-   <string name="lockscreen_seethrough_summary">Allows you to see your homescreen behind the lock screen including apps.</string>
-
     <string name="lockscreen_auto_rotate_title">Lockscreen Auto Rotate</string>
     <string name="lockscreen_auto_rotate_summary">Lockscreen will have ability to rotate via device orientation. This is independent of Auto-rotation in display</string>
     <string name="lockscreen_text_color_title">Lockscreen text color</string>
