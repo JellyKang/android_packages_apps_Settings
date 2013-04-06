@@ -211,6 +211,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     }
 
     public void refreshSettings() {
+	PreferenceScreen prefSet = getPreferenceScreen();
 	mStatusBarColor = (ColorPickerPreference) findPreference(PREF_STATUS_BAR_COLOR);
         mStatusBarColor.setOnPreferenceChangeListener(this);
         int intColor = Settings.System.getInt(getActivity().getContentResolver(),
