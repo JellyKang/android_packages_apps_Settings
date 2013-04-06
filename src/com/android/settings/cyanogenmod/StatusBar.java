@@ -25,10 +25,18 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
+import android.content.ActivityNotFoundException;
 import android.util.Log;
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
+import com.android.settings.widget.SeekBarPreference;
+
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+
 import com.android.settings.R;
+import com.android.settings.util.Helpers;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
@@ -51,6 +59,10 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private static final String PREF_BATT_BAR_WIDTH = "battery_bar_thickness";
     private static final String PREF_BATT_ANIMATE = "battery_bar_animate";
 
+    private static final String PREF_STATUS_BAR_ALPHA = "status_bar_alpha";
+    private static final String PREF_STATUS_BAR_ALPHA_MODE = "status_bar_alpha_mode";
+    private static final String PREF_STATUS_BAR_COLOR = "status_bar_color";
+
     private ListPreference mStatusBarBattery;
     private ListPreference mBatteryBar;
     private ListPreference mBatteryBarStyle;
@@ -67,6 +79,10 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private CheckBoxPreference mMMSBreath;
     private PreferenceCategory mPrefCategoryGeneral;
     private ListPreference mStatusBarIconOpacity;
+
+    private SeekBarPreference mStatusbarTransparency;
+    private ColorPickerPreference mStatusBarColor;
+    private ListPreference mAlphaMode;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -181,6 +197,8 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
 
         updateBatteryBarOptions();
 
+	refreshSettings();
+
         mPrefCategoryGeneral = (PreferenceCategory) findPreference(STATUS_BAR_CATEGORY_GENERAL);
 
         if (Utils.isWifiOnly(getActivity())) {
@@ -191,6 +209,35 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
             mPrefCategoryGeneral.removePreference(mStatusBarBrightnessControl);
         }
 
+    }
+
+    public void refreshSettings() {
+	mStatusBarColor = (ColorPickerPreference) findPreference(PREF_STATUS_BAR_COLOR);
+        mStatusBarColor.setOnPreferenceChangeListener(this);
+        int intColor = Settings.System.getInt(getActivity().getContentResolver(),
+                    Settings.System.STATUS_BAR_COLOR, 0xff000000);
+        String hexColor = String.format("#%08x", (0xffffffff & intColor));
+        mStatusBarColor.setNewPreviewColor(intColor);
+
+        float statBarTransparency = 0.0f;
+        try{
+            statBarTransparency = Settings.System.getFloat(getActivity()
+                 .getContentResolver(), Settings.System.STATUS_BAR_ALPHA);
+        } catch (Exception e) {
+            statBarTransparency = 0.0f;
+            Settings.System.putFloat(getActivity().getContentResolver(), Settings.System.STATUS_BAR_ALPHA, 0.0f);
+        }
+        mStatusbarTransparency = (SeekBarPreference) findPreference(PREF_STATUS_BAR_ALPHA);
+        mStatusbarTransparency.setProperty(Settings.System.STATUS_BAR_ALPHA);
+        mStatusbarTransparency.setInitValue((int) (statBarTransparency * 100));
+        mStatusbarTransparency.setOnPreferenceChangeListener(this);
+
+        mAlphaMode = (ListPreference) prefs.findPreference(PREF_STATUS_BAR_ALPHA_MODE);
+        int alphaMode = Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.STATUS_BAR_ALPHA_MODE, 1);
+        mAlphaMode.setValue(String.valueOf(alphaMode));
+        mAlphaMode.setSummary(mAlphaMode.getEntry());
+        mAlphaMode.setOnPreferenceChangeListener(this);
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -251,8 +298,48 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
                     Settings.System.STATUSBAR_BATTERY_BAR_THICKNESS, val);
             mBatteryBarThickness.setSummary(mBatteryBarThickness.getEntries()[index]);
             return true;
+        } else if (preference == mStatusbarTransparency) {
+            float valStat = Float.parseFloat((String) newValue);
+            Settings.System.putFloat(getActivity().getContentResolver(),
+                    Settings.System.STATUS_BAR_ALPHA,
+                    valStat / 100);
+            return true;
+        } else if (preference == mStatusBarColor) {
+            String hex = ColorPickerPreference.convertToARGB(
+                    Integer.valueOf(String.valueOf(newValue)));
+            preference.setSummary(hex);
+            int intHex = ColorPickerPreference.convertToColorInt(hex);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUS_BAR_COLOR, intHex);
+            return true;
+        } else if (preference == mAlphaMode) {
+            int alphaMode = Integer.valueOf((String) newValue);
+            int index = mAlphaMode.findIndexOfValue((String) newValue);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUS_BAR_ALPHA_MODE, alphaMode);
+            mAlphaMode.setSummary(mAlphaMode.getEntries()[index]);
+            return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.reset:
+                Settings.System.putInt(getActivity().getContentResolver(),
+                        Settings.System.STATUS_BAR_ALPHA_MODE, 1);
+                Settings.System.putInt(getActivity().getContentResolver(),
+                        Settings.System.STATUS_BAR_COLOR, 0xff000000);
+
+                Settings.System.putFloat(getActivity().getContentResolver(),
+                       Settings.System.STATUS_BAR_ALPHA, 0.0f);
+
+                refreshSettings();
+                return true;
+             default:
+                return super.onContextItemSelected(item);
+        }
     }
 
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
