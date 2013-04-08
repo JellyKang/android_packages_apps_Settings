@@ -116,6 +116,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
         addPreferencesFromResource(R.xml.display_settings);
 
+	PreferenceScreen prefSet = getPreferenceScreen();
+
         mDisplayRotationPreference = (PreferenceScreen) findPreference(KEY_DISPLAY_ROTATION);
 
         mScreenSaverPreference = findPreference(KEY_SCREEN_SAVER);
@@ -162,7 +164,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
         // respect device default configuration
         // true fades while false animates
-        boolean electronBeamFadesConfig = mContext.getResources().getBoolean(
+        boolean electronBeamFadesConfig = getActivity().getResources().getBoolean(
                 com.android.internal.R.bool.config_animateScreenLights);
 
         // use this to enable/disable crt on feature
