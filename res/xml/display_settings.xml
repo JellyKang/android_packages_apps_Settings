@@ -17,10 +17,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         android:title="@string/display_settings"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
-	
-	<PreferenceCategory
-        android:key="category_animation_options"
-        android:title="@string/display_category_animation_options_title" >
 
         <CheckBoxPreference
             android:key="system_power_crt_screen_off"
@@ -34,8 +30,6 @@
             android:entries="@array/entries_system_power_crt_mode"
             android:entryValues="@array/values_system_power_crt_mode"
             android:dependency="system_power_crt_screen_off" />
-	    
-	</PreferenceCategory>
 
         <com.android.settings.BrightnessPreference
                 android:key="brightness"
