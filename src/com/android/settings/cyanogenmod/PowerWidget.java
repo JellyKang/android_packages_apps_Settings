@@ -26,6 +26,14 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+
 import android.app.ListFragment;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -56,6 +64,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Display;
+import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
