@@ -125,12 +125,14 @@ public class PowerWidget extends SettingsPreferenceFragment implements
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+	
+	addPreferencesFromResource(R.xml.power_widget_settings);
 
         PreferenceScreen prefSet = getPreferenceScreen();
 
         mActivity = getActivity();
 
-        mCustomLabel = findPreference(PREF_CUSTOM_CARRIER_LABEL);
+	mCustomLabel = findPreference(PREF_CUSTOM_CARRIER_LABEL);
         updateCustomLabelTextSummary();
 
 	customnavTemp = new File(getActivity().getFilesDir()+"/notification_wallpaper_temp.jpg");
@@ -157,7 +159,6 @@ public class PowerWidget extends SettingsPreferenceFragment implements
         updateCustomBackgroundSummary();
 
         if (getPreferenceManager() != null) {
-            addPreferencesFromResource(R.xml.power_widget_settings);
 
             mPowerWidget = (CheckBoxPreference) prefSet.findPreference(UI_EXP_WIDGET);
             mPowerWidgetHideOnChange = (CheckBoxPreference) prefSet
