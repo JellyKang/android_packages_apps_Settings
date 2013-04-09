@@ -80,6 +80,7 @@ import android.widget.EditText;
 
 import com.android.internal.telephony.Phone;
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.widget.SeekBarPreference;
 import net.margaritov.preference.colorpicker.ColorPickerView;
@@ -118,7 +119,6 @@ public class PowerWidget extends SettingsPreferenceFragment implements
     private static final String WALLPAPER_NAME = "notification_wallpaper.jpg";
     private static final String WALLPAPER_NAME_LANDSCAPE = "notification_wallpaper_landscape.jpg";
 
-    private ContentResolver mResolver;
     private Activity mActivity;
 
     @Override
@@ -128,7 +128,6 @@ public class PowerWidget extends SettingsPreferenceFragment implements
 
         PreferenceScreen prefSet = getPreferenceScreen();
 
-        mResolver = getContentResolver();
         mActivity = getActivity();
 
         mCustomLabel = findPreference(PREF_CUSTOM_CARRIER_LABEL);
