@@ -71,8 +71,8 @@ import android.widget.EditText;
 import com.android.internal.telephony.Phone;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-+import com.android.settings.widget.SeekBarPreference;
-+import net.margaritov.preference.colorpicker.ColorPickerView;
+import com.android.settings.widget.SeekBarPreference;
+import net.margaritov.preference.colorpicker.ColorPickerView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
 public class PowerWidget extends SettingsPreferenceFragment implements
