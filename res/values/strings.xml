@@ -4469,6 +4469,9 @@ rience. Enable at your own discretion.</string>
     <string name="hex_hint">#ff000000</string>
     <string name="set">Set</string>
 
+    <string name="quick_pulldown_summary_auto">When no notifications</string>
+        <string name="quick_pulldown_auto">Auto</string>
+
     <!-- **** JELLYKANG ADDITIONS END **** -->
 
 </resources>
