@@ -4460,6 +4460,15 @@ rience. Enable at your own discretion.</string>
     <string name="notification_drawer_custom_background_dialog_title">Choose color</string>
     <string name="notif_wallpaper_alpha_title">Notification background transparency</string>
 
+    <!-- Color Picker -->
+    <string name="dialog_color_picker">Color Picker</string>
+    <string name="press_color_to_apply">Press on color below to apply</string>
+    <string name="arrow_right">→</string>
+    <string name="arrow_down">↓</string>
+    <string name="hex">Hex:</string>
+    <string name="hex_hint">#ff000000</string>
+    <string name="set">Set</string>
+
     <!-- **** JELLYKANG ADDITIONS END **** -->
 
 </resources>
