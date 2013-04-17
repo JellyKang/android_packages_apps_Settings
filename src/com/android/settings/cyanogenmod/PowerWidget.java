@@ -86,6 +86,8 @@ import com.android.settings.widget.SeekBarPreference;
 import net.margaritov.preference.colorpicker.ColorPickerView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
+import static com.android.internal.util.cm.QSUtils.deviceSupportsMobileData;
+
 public class PowerWidget extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "PowerWidget";
@@ -604,8 +606,7 @@ public class PowerWidget extends SettingsPreferenceFragment implements
             }
 
             // Don't show mobile data options if not supported
-            boolean isMobileData = pm.hasSystemFeature(PackageManager.FEATURE_TELEPHONY);
-            if (!isMobileData) {
+            if (!deviceSupportsMobileData(getActivity())) {
                 PowerWidgetUtil.BUTTONS.remove(PowerWidgetUtil.BUTTON_MOBILEDATA);
                 PowerWidgetUtil.BUTTONS.remove(PowerWidgetUtil.BUTTON_NETWORKMODE);
                 PowerWidgetUtil.BUTTONS.remove(PowerWidgetUtil.BUTTON_WIFIAP);
