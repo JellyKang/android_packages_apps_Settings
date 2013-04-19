@@ -16,9 +16,12 @@
 
 package com.android.settings.cyanogenmod;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -32,6 +35,7 @@ import android.preference.PreferenceGroup;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
+import android.provider.Settings.SettingNotFoundException;
 import android.widget.Toast;
 import android.preference.PreferenceScreen;
 import android.util.Log;
@@ -40,9 +44,15 @@ import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.view.IWindowManager;
 import android.view.WindowManagerGlobal;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import net.margaritov.preference.colorpicker.ColorPickerPreference;
+
+import java.util.Date;
 
 public class SystemSettings extends SettingsPreferenceFragment  implements
         Preference.OnPreferenceChangeListener {
@@ -63,7 +73,22 @@ public class SystemSettings extends SettingsPreferenceFragment  implements
     private static final String KEY_PIE_CONTROL = "pie_control";
     private static final String KEY_EXPANDED_DESKTOP = "expanded_desktop";
     private static final String KEY_EXPANDED_DESKTOP_NO_NAVBAR = "expanded_desktop_no_navbar";
-    private static final String KEY_RECENTS_RAM_BAR = "recents_ram_bar";
+
+    private static final String RAM_BAR_MODE = "ram_bar_mode";
+    private static final String RAM_BAR_COLOR_APP_MEM = "ram_bar_color_app_mem";
+    private static final String RAM_BAR_COLOR_CACHE_MEM = "ram_bar_color_cache_mem";
+    private static final String RAM_BAR_COLOR_TOTAL_MEM = "ram_bar_color_total_mem";
+
+    private static final String EXPLANATION_URL = "http://www.slimroms.net/index.php/faq/slimbean/238-why-do-i-have-less-memory-free-on-my-device";
+
+    static final int DEFAULT_MEM_COLOR = 0xff8d8d8d;
+    static final int DEFAULT_CACHE_COLOR = 0xff00aa00;
+    static final int DEFAULT_ACTIVE_APPS_COLOR = 0xff33b5e5;
+
+    private ListPreference mRamBarMode;
+    private ColorPickerPreference mRamBarAppMemColor;
+    private ColorPickerPreference mRamBarCacheMemColor;
+    private ColorPickerPreference mRamBarTotalMemColor;
 
     private PreferenceScreen mNotificationPulse;
     private PreferenceScreen mBatteryPulse;
@@ -72,7 +97,6 @@ public class SystemSettings extends SettingsPreferenceFragment  implements
     private ListPreference mExpandedDesktopPref;
     private CheckBoxPreference mExpandedDesktopNoNavbarPref;
     private boolean mIsPrimary;
-    private CheckBoxPreference mRamBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -154,11 +178,6 @@ public class SystemSettings extends SettingsPreferenceFragment  implements
             }
         }
 
-        mRamBar = (CheckBoxPreference) findPreference(KEY_RECENTS_RAM_BAR);
-        mRamBar.setChecked(Settings.System.getInt(
-                getActivity().getContentResolver(),
-                Settings.System.RECENTS_RAM_BAR, 0) == 1);
-
         // Pie controls
         mPieControl = (PreferenceScreen) findPreference(KEY_PIE_CONTROL);
         if (mPieControl != null && removeNavbar) {
@@ -203,8 +222,62 @@ mDynamicBugReport = (CheckBoxPreference) prefSet.findPreference(DYNAMIC_BUGREPOR
             Log.e(TAG, "Error getting navigation bar status");
         }
 
+	int intColor;
+        String hexColor;
+
+        addPreferencesFromResource(R.xml.ram_bar);
+
+        PreferenceScreen prefSet = getPreferenceScreen();
+
+        mRamBarMode = (ListPreference) prefSet.findPreference(RAM_BAR_MODE);
+        int ramBarMode = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.RECENTS_RAM_BAR_MODE, 0);
+        mRamBarMode.setValue(String.valueOf(ramBarMode));
+        mRamBarMode.setSummary(mRamBarMode.getEntry());
+        mRamBarMode.setOnPreferenceChangeListener(this);
+
+        mRamBarAppMemColor = (ColorPickerPreference) findPreference(RAM_BAR_COLOR_APP_MEM);
+        mRamBarAppMemColor.setOnPreferenceChangeListener(this);
+        intColor = Settings.System.getInt(getActivity().getContentResolver(),
+                    Settings.System.RECENTS_RAM_BAR_ACTIVE_APPS_COLOR, DEFAULT_ACTIVE_APPS_COLOR);
+        hexColor = String.format("#%08x", (0xffffffff & intColor));
+        mRamBarAppMemColor.setSummary(hexColor);
+
+        mRamBarCacheMemColor = (ColorPickerPreference) findPreference(RAM_BAR_COLOR_CACHE_MEM);
+        mRamBarCacheMemColor.setOnPreferenceChangeListener(this);
+        intColor = Settings.System.getInt(getActivity().getContentResolver(),
+                    Settings.System.RECENTS_RAM_BAR_CACHE_COLOR, DEFAULT_CACHE_COLOR);
+        hexColor = String.format("#%08x", (0xffffffff & intColor));
+        mRamBarCacheMemColor.setSummary(hexColor);
+
+        mRamBarTotalMemColor = (ColorPickerPreference) findPreference(RAM_BAR_COLOR_TOTAL_MEM);
+        mRamBarTotalMemColor.setOnPreferenceChangeListener(this);
+        intColor = Settings.System.getInt(getActivity().getContentResolver(),
+                    Settings.System.RECENTS_RAM_BAR_MEM_COLOR, DEFAULT_MEM_COLOR);
+        hexColor = String.format("#%08x", (0xffffffff & intColor));
+        mRamBarTotalMemColor.setSummary(hexColor);
+
+        updateRamBarOptions();
+
+
         // Don't display the lock clock preference if its not installed
         removePreferenceIfPackageNotInstalled(findPreference(KEY_LOCK_CLOCK));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.help:
+                final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(EXPLANATION_URL));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(intent);
+                return true;
+            case R.id.reset:
+                ramBarColorReset();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
     }
 
 @Override
@@ -214,14 +287,7 @@ mDynamicBugReport = (CheckBoxPreference) prefSet.findPreference(DYNAMIC_BUGREPOR
 	    Toast.makeText(getActivity(), "Restart system to make changes take effect",
                         Toast.LENGTH_LONG).show();
             return true;
-        } else if (preference == mRamBar) {
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.RECENTS_RAM_BAR,
-                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
-	    Toast.makeText(getActivity(), "Restart system to make changes take effect",
-                        Toast.LENGTH_LONG).show();
-            return true;
-	}
+        }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
@@ -257,8 +323,42 @@ mDynamicBugReport = (CheckBoxPreference) prefSet.findPreference(DYNAMIC_BUGREPOR
             boolean value = (Boolean) objValue;
             updateExpandedDesktop(value ? 2 : 0);
             return true;
-        }
+        } else if (preference == mRamBarMode) {
+            int ramBarMode = Integer.valueOf((String) newValue);
+            int index = mRamBarMode.findIndexOfValue((String) newValue);
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.RECENTS_RAM_BAR_MODE, ramBarMode);
+            mRamBarMode.setSummary(mRamBarMode.getEntries()[index]);
+            updateRamBarOptions();
+            return true;
+        } else if (preference == mRamBarAppMemColor) {
+            String hex = ColorPickerPreference.convertToARGB(Integer
+                    .valueOf(String.valueOf(newValue)));
+            preference.setSummary(hex);
 
+            int intHex = ColorPickerPreference.convertToColorInt(hex);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.RECENTS_RAM_BAR_ACTIVE_APPS_COLOR, intHex);
+            return true;
+        } else if (preference == mRamBarCacheMemColor) {
+            String hex = ColorPickerPreference.convertToARGB(Integer
+                    .valueOf(String.valueOf(newValue)));
+            preference.setSummary(hex);
+
+            int intHex = ColorPickerPreference.convertToColorInt(hex);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.RECENTS_RAM_BAR_CACHE_COLOR, intHex);
+            return true;
+        } else if (preference == mRamBarTotalMemColor) {
+            String hex = ColorPickerPreference.convertToARGB(Integer
+                    .valueOf(String.valueOf(newValue)));
+            preference.setSummary(hex);
+
+            int intHex = ColorPickerPreference.convertToColorInt(hex);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.RECENTS_RAM_BAR_MEM_COLOR, intHex);
+            return true;
+         }
         return false;
     }
 
@@ -311,6 +411,47 @@ mDynamicBugReport = (CheckBoxPreference) prefSet.findPreference(DYNAMIC_BUGREPOR
 
         if (mExpandedDesktopPref != null && summary != -1) {
             mExpandedDesktopPref.setSummary(res.getString(summary));
+        }
+    }
+
+    private void ramBarColorReset() {
+        Settings.System.putInt(getActivity().getContentResolver(),
+                Settings.System.RECENTS_RAM_BAR_ACTIVE_APPS_COLOR, DEFAULT_ACTIVE_APPS_COLOR);
+        Settings.System.putInt(getActivity().getContentResolver(),
+                Settings.System.RECENTS_RAM_BAR_CACHE_COLOR, DEFAULT_CACHE_COLOR);
+        Settings.System.putInt(getActivity().getContentResolver(),
+                Settings.System.RECENTS_RAM_BAR_MEM_COLOR, DEFAULT_MEM_COLOR);
+
+        mRamBarAppMemColor.setNewPreviewColor(DEFAULT_ACTIVE_APPS_COLOR);
+        mRamBarCacheMemColor.setNewPreviewColor(DEFAULT_CACHE_COLOR);
+        mRamBarTotalMemColor.setNewPreviewColor(DEFAULT_MEM_COLOR);
+        String hexColor = String.format("#%08x", (0xffffffff & DEFAULT_ACTIVE_APPS_COLOR));
+        mRamBarAppMemColor.setSummary(hexColor);
+        hexColor = String.format("#%08x", (0xffffffff & DEFAULT_ACTIVE_APPS_COLOR));
+        mRamBarCacheMemColor.setSummary(hexColor);
+        hexColor = String.format("#%08x", (0xffffffff & DEFAULT_MEM_COLOR));
+        mRamBarTotalMemColor.setSummary(hexColor);
+    }
+
+    private void updateRamBarOptions() {
+        int ramBarMode = Settings.System.getInt(getActivity().getContentResolver(),
+               Settings.System.RECENTS_RAM_BAR_MODE, 0);
+        if (ramBarMode == 0) {
+            mRamBarAppMemColor.setEnabled(false);
+            mRamBarCacheMemColor.setEnabled(false);
+            mRamBarTotalMemColor.setEnabled(false);
+        } else if (ramBarMode == 1) {
+            mRamBarAppMemColor.setEnabled(true);
+            mRamBarCacheMemColor.setEnabled(false);
+            mRamBarTotalMemColor.setEnabled(false);
+        } else if (ramBarMode == 2) {
+            mRamBarAppMemColor.setEnabled(true);
+            mRamBarCacheMemColor.setEnabled(true);
+            mRamBarTotalMemColor.setEnabled(false);
+        } else {
+            mRamBarAppMemColor.setEnabled(true);
+            mRamBarCacheMemColor.setEnabled(true);
+            mRamBarTotalMemColor.setEnabled(true);
         }
     }
 }
