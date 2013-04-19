@@ -225,8 +225,6 @@ mDynamicBugReport = (CheckBoxPreference) prefSet.findPreference(DYNAMIC_BUGREPOR
 	int intColor;
         String hexColor;
 
-        addPreferencesFromResource(R.xml.ram_bar);
-
         PreferenceScreen prefSet = getPreferenceScreen();
 
         mRamBarMode = (ListPreference) prefSet.findPreference(RAM_BAR_MODE);
@@ -270,7 +268,7 @@ mDynamicBugReport = (CheckBoxPreference) prefSet.findPreference(DYNAMIC_BUGREPOR
             case R.id.help:
                 final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(EXPLANATION_URL));
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mContext.startActivity(intent);
+                getActivity().getContentResolver().startActivity(intent);
                 return true;
             case R.id.reset:
                 ramBarColorReset();
@@ -324,8 +322,8 @@ mDynamicBugReport = (CheckBoxPreference) prefSet.findPreference(DYNAMIC_BUGREPOR
             updateExpandedDesktop(value ? 2 : 0);
             return true;
         } else if (preference == mRamBarMode) {
-            int ramBarMode = Integer.valueOf((String) newValue);
-            int index = mRamBarMode.findIndexOfValue((String) newValue);
+            int ramBarMode = Integer.valueOf((String) objValue);
+            int index = mRamBarMode.findIndexOfValue((String) objValue);
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.RECENTS_RAM_BAR_MODE, ramBarMode);
             mRamBarMode.setSummary(mRamBarMode.getEntries()[index]);
@@ -333,7 +331,7 @@ mDynamicBugReport = (CheckBoxPreference) prefSet.findPreference(DYNAMIC_BUGREPOR
             return true;
         } else if (preference == mRamBarAppMemColor) {
             String hex = ColorPickerPreference.convertToARGB(Integer
-                    .valueOf(String.valueOf(newValue)));
+                    .valueOf(String.valueOf(objValue)));
             preference.setSummary(hex);
 
             int intHex = ColorPickerPreference.convertToColorInt(hex);
@@ -342,7 +340,7 @@ mDynamicBugReport = (CheckBoxPreference) prefSet.findPreference(DYNAMIC_BUGREPOR
             return true;
         } else if (preference == mRamBarCacheMemColor) {
             String hex = ColorPickerPreference.convertToARGB(Integer
-                    .valueOf(String.valueOf(newValue)));
+                    .valueOf(String.valueOf(objValue)));
             preference.setSummary(hex);
 
             int intHex = ColorPickerPreference.convertToColorInt(hex);
@@ -351,7 +349,7 @@ mDynamicBugReport = (CheckBoxPreference) prefSet.findPreference(DYNAMIC_BUGREPOR
             return true;
         } else if (preference == mRamBarTotalMemColor) {
             String hex = ColorPickerPreference.convertToARGB(Integer
-                    .valueOf(String.valueOf(newValue)));
+                    .valueOf(String.valueOf(objValue)));
             preference.setSummary(hex);
 
             int intHex = ColorPickerPreference.convertToColorInt(hex);
