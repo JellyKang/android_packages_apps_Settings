@@ -25,6 +25,11 @@
          <extra android:name="cm_security" android:value="true" />
      </PreferenceScreen>
 
+     <CheckBoxPreference
+        android:key="lockscreen_use_widget_container_carousel"
+        android:title="@string/lockscreen_use_widget_container_carousel_title"
+        android:summary="@string/lockscreen_use_widget_container_carousel_summary" />
+
      <ListPreference
         android:key="lockscreen_background"
         android:persistent="false"

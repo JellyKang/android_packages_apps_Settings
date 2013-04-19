@@ -68,6 +68,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
     private static final String PREF_LOCKSCREEN_AUTO_ROTATE = "lockscreen_auto_rotate";
     private static final String PREF_LOCKSCREEN_TEXT_COLOR = "lockscreen_text_color";
     private static final String PREF_LOCKSCREEN_ALL_WIDGETS = "lockscreen_all_widgets";
+    private static final String PREF_LOCKSCREEN_USE_CAROUSEL = "lockscreen_use_widget_container_carousel";
 
     private ListPreference mCustomBackground;
     private ListPreference mBatteryStatus;
@@ -75,6 +76,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
     ColorPickerPreference mLockscreenTextColor;
     CheckBoxPreference mLockscreenAutoRotate;
     CheckBoxPreference mLockscreenAllWidgets;
+    private CheckBoxPreference mLockscreenUseCarousel;
 
     private File mWallpaperImage;
     private File mWallpaperTemporary;
@@ -139,6 +141,10 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
 
         mWallpaperImage = new File(getActivity().getFilesDir() + "/lockwallpaper");
         mWallpaperTemporary = new File(getActivity().getCacheDir() + "/lockwallpaper.tmp");
+
+	mLockscreenUseCarousel = (CheckBoxPreference)findPreference(PREF_LOCKSCREEN_USE_CAROUSEL);
+        mLockscreenUseCarousel.setChecked(Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.LOCKSCREEN_USE_WIDGET_CONTAINER_CAROUSEL, 0) == 1);
 
         // Don't display the lock clock preference if its not installed
         removePreferenceIfPackageNotInstalled(findPreference(KEY_LOCK_CLOCK));
@@ -244,6 +250,10 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
             Settings.System.putBoolean(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.LOCKSCREEN_ALL_WIDGETS,
                     ((CheckBoxPreference) preference).isChecked());
+            return true;
+        } else if (preference == mLockscreenUseCarousel) {
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.LOCKSCREEN_USE_WIDGET_CONTAINER_CAROUSEL, mLockscreenUseCarousel.isChecked() ? 1 : 0);
             return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);

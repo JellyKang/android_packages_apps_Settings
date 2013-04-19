@@ -4472,6 +4472,9 @@ rience. Enable at your own discretion.</string>
     <string name="quick_pulldown_summary_auto">When no notifications</string>
         <string name="quick_pulldown_auto">Auto</string>
 
+    <string name="lockscreen_use_widget_container_carousel_title">Use widget carousel in portrait</string>
+    <string name="lockscreen_use_widget_container_carousel_summary">Use carousel animation in portrait like it is in landscape when switching between lockscreen widgets.</string>
+
     <!-- **** JELLYKANG ADDITIONS END **** -->
 
 </resources>
