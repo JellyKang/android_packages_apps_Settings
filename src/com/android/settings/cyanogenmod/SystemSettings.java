@@ -268,7 +268,7 @@ mDynamicBugReport = (CheckBoxPreference) prefSet.findPreference(DYNAMIC_BUGREPOR
             case R.id.help:
                 final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(EXPLANATION_URL));
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                getActivity().getContentResolver().startActivity(intent);
+                getActivity().startActivity(intent);
                 return true;
             case R.id.reset:
                 ramBarColorReset();
