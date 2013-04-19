@@ -63,6 +63,7 @@ public class SystemSettings extends SettingsPreferenceFragment  implements
     private static final String KEY_PIE_CONTROL = "pie_control";
     private static final String KEY_EXPANDED_DESKTOP = "expanded_desktop";
     private static final String KEY_EXPANDED_DESKTOP_NO_NAVBAR = "expanded_desktop_no_navbar";
+    private static final String KEY_RECENTS_RAM_BAR = "recents_ram_bar";
 
     private PreferenceScreen mNotificationPulse;
     private PreferenceScreen mBatteryPulse;
@@ -71,6 +72,7 @@ public class SystemSettings extends SettingsPreferenceFragment  implements
     private ListPreference mExpandedDesktopPref;
     private CheckBoxPreference mExpandedDesktopNoNavbarPref;
     private boolean mIsPrimary;
+    private CheckBoxPreference mRamBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -152,6 +154,11 @@ public class SystemSettings extends SettingsPreferenceFragment  implements
             }
         }
 
+        mRamBar = (CheckBoxPreference) findPreference(KEY_RECENTS_RAM_BAR);
+        mRamBar.setChecked(Settings.System.getInt(
+                getActivity().getContentResolver(),
+                Settings.System.RECENTS_RAM_BAR, 0) == 1);
+
         // Pie controls
         mPieControl = (PreferenceScreen) findPreference(KEY_PIE_CONTROL);
         if (mPieControl != null && removeNavbar) {
@@ -204,13 +211,17 @@ mDynamicBugReport = (CheckBoxPreference) prefSet.findPreference(DYNAMIC_BUGREPOR
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         if (preference == mEnableNavigationBar) {
             Settings.System.putBoolean(getActivity().getApplicationContext().getContentResolver(), Settings.System.NAVIGATION_BAR_SHOW, ((CheckBoxPreference) preference).isChecked() ? true : false);
-	//boolean value = mEnableNavigationBar.isChecked();
-	//Bundle.putBoolean(com.android.internal.R.bool.config_showNavigationBar, value ? true : false);
-            //Helpers.restartSystemUI();
 	    Toast.makeText(getActivity(), "Restart system to make changes take effect",
                         Toast.LENGTH_LONG).show();
             return true;
-        }
+        } else if (preference == mRamBar) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.RECENTS_RAM_BAR,
+                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
+	    Toast.makeText(getActivity(), "Restart system to make changes take effect",
+                        Toast.LENGTH_LONG).show();
+            return true;
+	}
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 

@@ -4475,6 +4475,10 @@ rience. Enable at your own discretion.</string>
     <string name="lockscreen_use_widget_container_carousel_title">Use widget carousel in portrait</string>
     <string name="lockscreen_use_widget_container_carousel_summary">Use carousel animation in portrait like it is in landscape when switching between lockscreen widgets.</string>
 
+    <!-- Recents Ram Bar -->
+    <string name="ram_bar">RAM Bar</string>
+    <string name="ram_bar_summary">Shows RAM usage in the recent apps menu</string>
+
     <!-- **** JELLYKANG ADDITIONS END **** -->
 
 </resources>
