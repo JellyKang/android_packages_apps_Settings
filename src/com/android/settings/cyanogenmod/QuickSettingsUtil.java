@@ -93,7 +93,7 @@ public class QuickSettingsUtil {
                 "com.android.systemui:drawable/ic_qs_signal_4"));
         TILES.put(TILE_MUSIC, new QuickSettingsUtil.TileInfo(
                 TILE_MUSIC, R.string.title_tile_music,
-                "@*android:drawable/ic_media_play", true));
+                "@*android:drawable/ic_media_play"));
         TILES.put(TILE_NETWORKMODE, new QuickSettingsUtil.TileInfo(
                 TILE_NETWORKMODE, R.string.title_tile_networkmode,
                 "com.android.systemui:drawable/ic_qs_2g3g_on"));
