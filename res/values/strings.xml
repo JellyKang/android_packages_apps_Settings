@@ -4494,6 +4494,8 @@ rience. Enable at your own discretion.</string>
     <string name="ram_bar_button_help">Help</string>
     <string name="ram_bar_button_reset">Reset colors</string>
 
+    <string name="title_tile_music">Music</string>
+
     <!-- **** JELLYKANG ADDITIONS END **** -->
 
 </resources>
