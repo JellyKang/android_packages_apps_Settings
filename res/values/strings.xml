@@ -4401,8 +4401,6 @@
     <string name="status_bar_icon_opacity">Notification icon opacity</string>
     <string name="status_bar_icon_opacity_summary">Sets opacity of status bar notification icons</string>
 
-    <string name="aokp_performance_title">PerformanceControl</string>
-
     <string name="lockscreen_auto_rotate_title">Lockscreen Auto Rotate</string>
     <string name="lockscreen_auto_rotate_summary">Lockscreen will have ability to rotate via device orientation. This is independent of Auto-rotation in display</string>
     <string name="lockscreen_text_color_title">Lockscreen text color</string>
@@ -4495,9 +4493,6 @@ rience. Enable at your own discretion.</string>
     <string name="ram_bar_button_reset">Reset colors</string>
 
     <string name="title_tile_music">Music</string>
-=======
-    <string name="aokp_performance_title">AOKP Performance Control</string>
->>>>>>> parent of 9df2e32... Rearange PerformanceControl
 
     <!-- **** JELLYKANG ADDITIONS END **** -->
 
