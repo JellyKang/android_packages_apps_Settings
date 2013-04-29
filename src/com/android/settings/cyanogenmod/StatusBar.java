@@ -62,6 +62,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private static final String PREF_STATUS_BAR_ALPHA_MODE = "status_bar_alpha_mode";
     private static final String PREF_STATUS_BAR_COLOR = "status_bar_color";
     private static final String STATUS_BAR_AUTO_HIDE = "status_bar_auto_hide";
+    private static final String HIDDEN_STATUSBAR_PULLDOWN = "hidden_statusbar_pulldown";
 
     private ListPreference mStatusBarBattery;
     private ListPreference mBatteryBar;
@@ -83,6 +84,8 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private SeekBarPreference mStatusbarTransparency;
     private ColorPickerPreference mStatusBarColor;
     private ListPreference mAlphaMode;
+    private CheckBoxPreference mStatusBarAutoHide;
+    private CheckBoxPreference mHiddenStatusbarPulldown;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -91,7 +94,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         addPreferencesFromResource(R.xml.status_bar);
 
         PreferenceScreen prefSet = getPreferenceScreen();
-
+    private static final String HIDDEN_STATUSBAR_PULLDOWN = "hidden_statusbar_pulldown";
         mStatusBarClock = (CheckBoxPreference) prefSet.findPreference(STATUS_BAR_CLOCK);
         mStatusBarBrightnessControl = (CheckBoxPreference) prefSet.findPreference(STATUS_BAR_BRIGHTNESS_CONTROL);
         mStatusBarAmPm = (ListPreference) prefSet.findPreference(STATUS_BAR_AM_PM);
@@ -101,6 +104,10 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         mStatusBarAutoHide = (CheckBoxPreference) prefSet.findPreference(STATUS_BAR_AUTO_HIDE);
         mStatusBarAutoHide.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.AUTO_HIDE_STATUSBAR, 0) == 1));
+
+        mHiddenStatusbarPulldown = (CheckBoxPreference) prefSet.findPreference(HIDDEN_STATUSBAR_PULLDOWN);
+        mHiddenStatusbarPulldown.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.HIDDEN_STATUSBAR_PULLDOWN, 0) == 1));
 
         mStatusBarIconOpacity = (ListPreference) prefSet.findPreference(STATUS_BAR_NOTIF_ICON_OPACITY);
         int iconOpacity = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
@@ -382,6 +389,11 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
             value = mStatusBarAutoHide.isChecked();
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.AUTO_HIDE_STATUSBAR, value ? 1 : 0);
+            return true;
+        } else if (preference == mHiddenStatusbarPulldown) {
+            value = mHiddenStatusbarPulldown.isChecked();
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.HIDDEN_STATUSBAR_PULLDOWN, value ? 1 : 0);
             return true;
         }
         return false;

@@ -4494,10 +4494,13 @@ rience. Enable at your own discretion.</string>
 
     <string name="title_tile_music">Music</string>
 
-    <!-- Auto-Hide Status Bar -->
+    <!-- Auto Hide Status Bar -->
     <string name="auto_hide_statusbar">Auto Hide statusbar</string>
     <string name="auto_hide_statusbar_summary">Statusbar hides itself when there are no notifications</string>
 
+    <!-- Hidden Statusbar Pulldown -->
+    <string name="hidden_statusbar_pulldown_title">Hidden Statusbar Pulldown</string>
+    <string name="hidden_statusbar_pulldown_summary">Allows Statusbar to be pulled down when hidden</string>
 
     <!-- **** JELLYKANG ADDITIONS END **** -->
 
