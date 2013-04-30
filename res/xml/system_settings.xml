@@ -84,6 +84,15 @@
                 android:key="enable_nav_bar"
                 android:title="@string/navigation_bar_category" />
 
+        <ListPreference
+            android:key="nav_buttons_height"
+            android:dialogTitle="@string/navigation_bar_height"
+            android:title="@string/navigation_bar_height"
+            android:entries="@array/nav_buttons_height_entries"
+            android:entryValues="@array/nav_buttons_height_values"
+            android:defaultValue="48"
+            android:persistent="false" />
+
         <PreferenceScreen
             android:key="navigation_bar"
             android:fragment="com.android.settings.cyanogenmod.NavBar"

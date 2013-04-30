@@ -4502,6 +4502,22 @@ rience. Enable at your own discretion.</string>
     <string name="hidden_statusbar_pulldown_title">Hidden Statusbar Pulldown</string>
     <string name="hidden_statusbar_pulldown_summary">Allows Statusbar to be pulled down when hidden</string>
 
+    <string name="navigation_bar_height">Button height</string>
+    <string name="navigation_bar_height_48">48dp (default)</string>
+    <string name="navigation_bar_height_47">47dp</string>
+    <string name="navigation_bar_height_46">46dp</string>
+    <string name="navigation_bar_height_45">45dp</string>
+    <string name="navigation_bar_height_44">44dp</string>
+    <string name="navigation_bar_height_43">43dp</string>
+    <string name="navigation_bar_height_42">42dp</string>
+    <string name="navigation_bar_height_41">41dp</string>
+    <string name="navigation_bar_height_40">40dp</string>
+    <string name="navigation_bar_height_39">39dp</string>
+    <string name="navigation_bar_height_38">38dp</string>
+    <string name="navigation_bar_height_37">37dp</string>
+    <string name="navigation_bar_height_36">36dp</string>
+    <string name="navigation_bar_height_35">35dp</string>
+
     <!-- **** JELLYKANG ADDITIONS END **** -->
 
 </resources>
