@@ -81,6 +81,7 @@ public class SystemSettings extends SettingsPreferenceFragment  implements
     private static final String RAM_BAR_COLOR_CACHE_MEM = "ram_bar_color_cache_mem";
     private static final String RAM_BAR_COLOR_TOTAL_MEM = "ram_bar_color_total_mem";
     private static final String KEY_NAVIGATION_BAR_HEIGHT = "navigation_bar_height";
+    private static final String KEY_NAVIGATION_BAR_WIDTH = "navigation_bar_width";
 
     private static final String EXPLANATION_URL = "http://www.slimroms.net/index.php/faq/slimbean/238-why-do-i-have-less-memory-free-on-my-device";
 
@@ -101,6 +102,7 @@ public class SystemSettings extends SettingsPreferenceFragment  implements
     private CheckBoxPreference mExpandedDesktopNoNavbarPref;
     private boolean mIsPrimary;
     private ListPreference mNavigationBarHeight;
+    private ListPreference mNavigationBarWidth;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -157,7 +159,6 @@ public class SystemSettings extends SettingsPreferenceFragment  implements
             if (removeNavbar) {
                 prefScreen.removePreference(findPreference(KEY_NAVIGATION_BAR));
                 prefScreen.removePreference(findPreference(KEY_NAVIGATION_RING));
-                prefScreen.removePreference(findPreference(KEY_NAVIGATION_BAR_HEIGHT));
                 prefScreen.removePreference(findPreference(KEY_NAVIGATION_BAR_CATEGORY));
             }
         } else {
@@ -195,6 +196,8 @@ public class SystemSettings extends SettingsPreferenceFragment  implements
 	if(Settings.System.getBoolean(getActivity().getContentResolver(),
                 Settings.System.NAVIGATION_BAR_SHOW, hasNavBarByDefault) == false){
 	//Don't show NavBar customization if the navbar isn't enabled
+                prefScreen.removePreference(findPreference(KEY_NAVIGATION_BAR_HEIGHT));
+                prefScreen.removePreference(findPreference(KEY_NAVIGATION_BAR_WIDTH));
 		NavBarCategory.removePreference(findPreference(KEY_NAVIGATION_RING));
 		NavBarCategory.removePreference(findPreference(KEY_NAVIGATION_BAR));
 	}
@@ -262,7 +265,6 @@ mDynamicBugReport = (CheckBoxPreference) prefSet.findPreference(DYNAMIC_BUGREPOR
 
         updateRamBarOptions();
 
-	        //statusNavigationBarHeight - TODO make it depending on the user
         mNavigationBarHeight = (ListPreference) findPreference(KEY_NAVIGATION_BAR_HEIGHT);
         mNavigationBarHeight.setOnPreferenceChangeListener(this);
 
@@ -270,6 +272,14 @@ mDynamicBugReport = (CheckBoxPreference) prefSet.findPreference(DYNAMIC_BUGREPOR
                  Settings.System.NAVIGATION_BAR_HEIGHT, 48);
         mNavigationBarHeight.setValue(String.valueOf(statusNavigationBarHeight));
         mNavigationBarHeight.setSummary(mNavigationBarHeight.getEntry());
+
+        mNavigationBarWidth = (ListPreference) findPreference(KEY_NAVIGATION_BAR_WIDTH);
+        mNavigationBarWidth.setOnPreferenceChangeListener(this);
+
+        int statusNavigationBarWidth = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                 Settings.System.NAVIGATION_BAR_WIDTH, 42);
+        mNavigationBarWidth.setValue(String.valueOf(statusNavigationBarWidth));
+        mNavigationBarWidth.setSummary(mNavigationBarWidth.getEntry());
 
         // Don't display the lock clock preference if its not installed
         removePreferenceIfPackageNotInstalled(findPreference(KEY_LOCK_CLOCK));
@@ -375,6 +385,13 @@ mDynamicBugReport = (CheckBoxPreference) prefSet.findPreference(DYNAMIC_BUGREPOR
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.NAVIGATION_BAR_HEIGHT, statusNavigationBarHeight);
             mNavigationBarHeight.setSummary(mNavigationBarHeight.getEntries()[index]);
+            return true;
+        } else if (preference == mNavigationBarWidth) {
+            int statusNavigationBarWidth = Integer.valueOf((String) objValue);
+            int index = mNavigationBarWidth.findIndexOfValue((String) objValue);
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.NAVIGATION_BAR_WIDTH, statusNavigationBarWidth);
+            mNavigationBarWidth.setSummary(mNavigationBarWidth.getEntries()[index]);
             return true;
          }
         return false;

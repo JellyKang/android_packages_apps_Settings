@@ -4518,6 +4518,22 @@ rience. Enable at your own discretion.</string>
     <string name="navigation_bar_height_36">36dp</string>
     <string name="navigation_bar_height_35">35dp</string>
 
+    <string name="navigation_bar_Width">Button Width</string>
+    <string name="navigation_bar_Width_48">48dp</string>
+    <string name="navigation_bar_Width_47">47dp</string>
+    <string name="navigation_bar_Width_46">46dp</string>
+    <string name="navigation_bar_Width_45">45dp</string>
+    <string name="navigation_bar_Width_44">44dp</string>
+    <string name="navigation_bar_Width_43">43dp</string>
+    <string name="navigation_bar_Width_42">42dp (default)</string>
+    <string name="navigation_bar_Width_41">41dp</string>
+    <string name="navigation_bar_Width_40">40dp</string>
+    <string name="navigation_bar_Width_39">39dp</string>
+    <string name="navigation_bar_Width_38">38dp</string>
+    <string name="navigation_bar_Width_37">37dp</string>
+    <string name="navigation_bar_Width_36">36dp</string>
+    <string name="navigation_bar_Width_35">35dp</string>
+
     <!-- **** JELLYKANG ADDITIONS END **** -->
 
 </resources>

@@ -933,5 +933,40 @@
         <item>35</item>
     </string-array>
 
+    <!--- Navigation bar width -->
+    <string-array name="navigation_bar_width_entries" translatable="false">
+        <item>@string/navigation_bar_width_48</item>
+        <item>@string/navigation_bar_width_47</item>
+        <item>@string/navigation_bar_width_46</item>
+        <item>@string/navigation_bar_width_45</item>
+        <item>@string/navigation_bar_width_44</item>
+        <item>@string/navigation_bar_width_43</item>
+        <item>@string/navigation_bar_width_42</item>
+        <item>@string/navigation_bar_width_41</item>
+        <item>@string/navigation_bar_width_40</item>
+        <item>@string/navigation_bar_width_39</item>
+        <item>@string/navigation_bar_width_38</item>
+        <item>@string/navigation_bar_width_37</item>
+        <item>@string/navigation_bar_width_36</item>
+        <item>@string/navigation_bar_width_35</item>
+    </string-array>
+
+    <string-array name="navigation_bar_width_values" translatable="false">
+        <item>48</item>
+        <item>47</item>
+        <item>46</item>
+        <item>45</item>
+        <item>44</item>
+        <item>43</item>
+        <item>42</item>
+        <item>41</item>
+        <item>40</item>
+        <item>39</item>
+        <item>38</item>
+        <item>37</item>
+        <item>36</item>
+        <item>35</item>
+    </string-array>
+
     <!-- **** JELLYKANG ADDITIONS END **** -->
 </resources>
