@@ -85,11 +85,11 @@
                 android:title="@string/navigation_bar_category" />
 
         <ListPreference
-            android:key="nav_buttons_height"
+            android:key="navigation_bar_height"
             android:dialogTitle="@string/navigation_bar_height"
             android:title="@string/navigation_bar_height"
-            android:entries="@array/nav_buttons_height_entries"
-            android:entryValues="@array/nav_buttons_height_values"
+            android:entries="@array/navigation_bar_height_entries"
+            android:entryValues="@array/navigation_bar_height_values"
             android:defaultValue="48"
             android:persistent="false" />
 

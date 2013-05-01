@@ -80,7 +80,7 @@ public class SystemSettings extends SettingsPreferenceFragment  implements
     private static final String RAM_BAR_COLOR_APP_MEM = "ram_bar_color_app_mem";
     private static final String RAM_BAR_COLOR_CACHE_MEM = "ram_bar_color_cache_mem";
     private static final String RAM_BAR_COLOR_TOTAL_MEM = "ram_bar_color_total_mem";
-    private static final String KEY_NAV_BUTTONS_HEIGHT = "nav_buttons_height";
+    private static final String KEY_NAVIGATION_BAR_HEIGHT = "navigation_bar_height";
 
     private static final String EXPLANATION_URL = "http://www.slimroms.net/index.php/faq/slimbean/238-why-do-i-have-less-memory-free-on-my-device";
 
@@ -100,7 +100,7 @@ public class SystemSettings extends SettingsPreferenceFragment  implements
     private ListPreference mExpandedDesktopPref;
     private CheckBoxPreference mExpandedDesktopNoNavbarPref;
     private boolean mIsPrimary;
-    private ListPreference mNavButtonsHeight;
+    private ListPreference mNavigationBarHeight;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -157,7 +157,7 @@ public class SystemSettings extends SettingsPreferenceFragment  implements
             if (removeNavbar) {
                 prefScreen.removePreference(findPreference(KEY_NAVIGATION_BAR));
                 prefScreen.removePreference(findPreference(KEY_NAVIGATION_RING));
-                prefScreen.removePreference(findPreference(KEY_NAV_BUTTONS_HEIGHT));
+                prefScreen.removePreference(findPreference(KEY_NAVIGATION_BAR_HEIGHT));
                 prefScreen.removePreference(findPreference(KEY_NAVIGATION_BAR_CATEGORY));
             }
         } else {
@@ -263,13 +263,13 @@ mDynamicBugReport = (CheckBoxPreference) prefSet.findPreference(DYNAMIC_BUGREPOR
         updateRamBarOptions();
 
 	        //NavButtonsHeight - TODO make it depending on the user
-        mNavButtonsHeight = (ListPreference) findPreference(KEY_NAV_BUTTONS_HEIGHT);
-        mNavButtonsHeight.setOnPreferenceChangeListener(this);
+        mNavigationBarHeight = (ListPreference) findPreference(KEY_NAV_BUTTONS_HEIGHT);
+        mNavigationBarHeight.setOnPreferenceChangeListener(this);
 
         int statusNavButtonsHeight = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                  Settings.System.NAV_BUTTONS_HEIGHT, 48);
-        mNavButtonsHeight.setValue(String.valueOf(statusNavButtonsHeight));
-        mNavButtonsHeight.setSummary(mNavButtonsHeight.getEntry());
+        mNavigationBarHeight.setValue(String.valueOf(statusNavButtonsHeight));
+        mNavigationBarHeight.setSummary(mNavigationBarHeight.getEntry());
 
         // Don't display the lock clock preference if its not installed
         removePreferenceIfPackageNotInstalled(findPreference(KEY_LOCK_CLOCK));
@@ -369,12 +369,12 @@ mDynamicBugReport = (CheckBoxPreference) prefSet.findPreference(DYNAMIC_BUGREPOR
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.RECENTS_RAM_BAR_MEM_COLOR, intHex);
             return true;
-        } else if (preference == mNavButtonsHeight) {
+        } else if (preference == mNavigationBarHeight) {
             int statusNavButtonsHeight = Integer.valueOf((String) objValue);
-            int index = mNavButtonsHeight.findIndexOfValue((String) objValue);
+            int index = mNavigationBarHeight.findIndexOfValue((String) objValue);
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.NAV_BUTTONS_HEIGHT, statusNavButtonsHeight);
-            mNavButtonsHeight.setSummary(mNavButtonsHeight.getEntries()[index]);
+            mNavigationBarHeight.setSummary(mNavigationBarHeight.getEntries()[index]);
             return true;
          }
         return false;
