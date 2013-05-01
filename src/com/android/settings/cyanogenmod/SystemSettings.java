@@ -262,13 +262,13 @@ mDynamicBugReport = (CheckBoxPreference) prefSet.findPreference(DYNAMIC_BUGREPOR
 
         updateRamBarOptions();
 
-	        //NavButtonsHeight - TODO make it depending on the user
-        mNavigationBarHeight = (ListPreference) findPreference(KEY_NAV_BUTTONS_HEIGHT);
+	        //statusNavigationBarHeight - TODO make it depending on the user
+        mNavigationBarHeight = (ListPreference) findPreference(KEY_NAVIGATION_BAR_HEIGHT);
         mNavigationBarHeight.setOnPreferenceChangeListener(this);
 
-        int statusNavButtonsHeight = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
-                 Settings.System.NAV_BUTTONS_HEIGHT, 48);
-        mNavigationBarHeight.setValue(String.valueOf(statusNavButtonsHeight));
+        int statusNavigationBarHeight = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                 Settings.System.NAVIGATION_BAR_HEIGHT, 48);
+        mNavigationBarHeight.setValue(String.valueOf(statusNavigationBarHeight));
         mNavigationBarHeight.setSummary(mNavigationBarHeight.getEntry());
 
         // Don't display the lock clock preference if its not installed
@@ -370,10 +370,10 @@ mDynamicBugReport = (CheckBoxPreference) prefSet.findPreference(DYNAMIC_BUGREPOR
                     Settings.System.RECENTS_RAM_BAR_MEM_COLOR, intHex);
             return true;
         } else if (preference == mNavigationBarHeight) {
-            int statusNavButtonsHeight = Integer.valueOf((String) objValue);
+            int statusNavigationBarHeight = Integer.valueOf((String) objValue);
             int index = mNavigationBarHeight.findIndexOfValue((String) objValue);
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.NAV_BUTTONS_HEIGHT, statusNavButtonsHeight);
+                    Settings.System.NAVIGATION_BAR_HEIGHT, statusNavigationBarHeight);
             mNavigationBarHeight.setSummary(mNavigationBarHeight.getEntries()[index]);
             return true;
          }
