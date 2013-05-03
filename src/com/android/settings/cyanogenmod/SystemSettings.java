@@ -103,6 +103,8 @@ public class SystemSettings extends SettingsPreferenceFragment  implements
     private boolean mIsPrimary;
     private ListPreference mNavigationBarHeight;
     private ListPreference mNavigationBarWidth;
+    private Preference mNavigationRing;
+    private Preference mNavigationBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -191,21 +193,6 @@ public class SystemSettings extends SettingsPreferenceFragment  implements
             prefScreen.removePreference(mPieControl);
             mPieControl = null;
         }
-	PreferenceCategory NavBarCategory = (PreferenceCategory) prefScreen.findPreference(
-                KEY_NAVIGATION_BAR_CATEGORY);
-	if(Settings.System.getBoolean(getActivity().getContentResolver(),
-                Settings.System.NAVIGATION_BAR_SHOW, hasNavBarByDefault) == false){
-	//Don't show NavBar customization if the navbar isn't enabled
-                prefScreen.removePreference(findPreference(KEY_NAVIGATION_BAR_HEIGHT));
-                prefScreen.removePreference(findPreference(KEY_NAVIGATION_BAR_WIDTH));
-		NavBarCategory.removePreference(findPreference(KEY_NAVIGATION_RING));
-		NavBarCategory.removePreference(findPreference(KEY_NAVIGATION_BAR));
-	}
-
-/**
-mDynamicBugReport = (CheckBoxPreference) prefSet.findPreference(DYNAMIC_BUGREPORT);
-        mDynamicBugReport.setChecked(Settings.System.getInt(resolver, Settings.System.QS_DYNAMIC_BUGREPORT, 1) == 1);
-**/
 
         // Expanded desktop
         mExpandedDesktopPref = (ListPreference) findPreference(KEY_EXPANDED_DESKTOP);
@@ -280,6 +267,24 @@ mDynamicBugReport = (CheckBoxPreference) prefSet.findPreference(DYNAMIC_BUGREPOR
                  Settings.System.NAVIGATION_BAR_WIDTH, 42);
         mNavigationBarWidth.setValue(String.valueOf(statusNavigationBarWidth));
         mNavigationBarWidth.setSummary(mNavigationBarWidth.getEntry());
+
+	PreferenceCategory NavBarCategory = (PreferenceCategory) prefScreen.findPreference(KEY_NAVIGATION_BAR_CATEGORY);
+        mNavigationRing = (Preference) findPreference(KEY_NAVIGATION_RING);
+	mNavigationBar = (Preference) findPreference(KEY_NAVIGATION_BAR);
+	
+	if(Settings.System.getBoolean(getActivity().getContentResolver(), Settings.System.NAVIGATION_BAR_SHOW, hasNavBarByDefault) == false){
+		//Don't show NavBar customization if the navbar isn't enabled
+		mNavigationBarHeight.setEnabled(false);
+		mNavigationBarWidth.setEnabled(false);
+		mNavigationRing.setEnabled(false);
+		mNavigationBar.setEnabled(false);
+	}
+	else{
+		mNavigationBarHeight.setEnabled(true);
+		mNavigationBarWidth.setEnabled(true);
+		mNavigationRing.setEnabled(true);
+		mNavigationBar.setEnabled(true);
+	}
 
         // Don't display the lock clock preference if its not installed
         removePreferenceIfPackageNotInstalled(findPreference(KEY_LOCK_CLOCK));
