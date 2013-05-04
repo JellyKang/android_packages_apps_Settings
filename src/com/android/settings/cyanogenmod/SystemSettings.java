@@ -268,24 +268,6 @@ public class SystemSettings extends SettingsPreferenceFragment  implements
         mNavigationBarWidth.setValue(String.valueOf(statusNavigationBarWidth));
         mNavigationBarWidth.setSummary(mNavigationBarWidth.getEntry());
 
-	PreferenceCategory NavBarCategory = (PreferenceCategory) prefScreen.findPreference(KEY_NAVIGATION_BAR_CATEGORY);
-        mNavigationRing = (Preference) findPreference(KEY_NAVIGATION_RING);
-	mNavigationBar = (Preference) findPreference(KEY_NAVIGATION_BAR);
-	
-	if(Settings.System.getBoolean(getActivity().getContentResolver(), Settings.System.NAVIGATION_BAR_SHOW, hasNavBarByDefault) == false){
-		//Don't show NavBar customization if the navbar isn't enabled
-		mNavigationBarHeight.setEnabled(false);
-		mNavigationBarWidth.setEnabled(false);
-		mNavigationRing.setEnabled(false);
-		mNavigationBar.setEnabled(false);
-	}
-	else{
-		mNavigationBarHeight.setEnabled(true);
-		mNavigationBarWidth.setEnabled(true);
-		mNavigationRing.setEnabled(true);
-		mNavigationBar.setEnabled(true);
-	}
-
         // Don't display the lock clock preference if its not installed
         removePreferenceIfPackageNotInstalled(findPreference(KEY_LOCK_CLOCK));
     }
@@ -312,6 +294,7 @@ public class SystemSettings extends SettingsPreferenceFragment  implements
             Settings.System.putBoolean(getActivity().getApplicationContext().getContentResolver(), Settings.System.NAVIGATION_BAR_SHOW, ((CheckBoxPreference) preference).isChecked() ? true : false);
 	    Toast.makeText(getActivity(), "Restart system to make changes take effect",
                         Toast.LENGTH_LONG).show();
+	    updateNavigationBarOptions();
             return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
@@ -427,6 +410,26 @@ public class SystemSettings extends SettingsPreferenceFragment  implements
         } else {
             mPieControl.setSummary(getString(R.string.pie_control_disabled));
         }
+    }
+
+    private void updateNavigationBarOptions() {
+	PreferenceCategory NavBarCategory = (PreferenceCategory) prefScreen.findPreference(KEY_NAVIGATION_BAR_CATEGORY);
+        mNavigationRing = (Preference) findPreference(KEY_NAVIGATION_RING);
+	mNavigationBar = (Preference) findPreference(KEY_NAVIGATION_BAR);
+	
+	if(Settings.System.getBoolean(getActivity().getContentResolver(), Settings.System.NAVIGATION_BAR_SHOW, hasNavBarByDefault) == false){
+		//Don't show NavBar customization if the navbar isn't enabled
+		mNavigationBarHeight.setEnabled(false);
+		mNavigationBarWidth.setEnabled(false);
+		mNavigationRing.setEnabled(false);
+		mNavigationBar.setEnabled(false);
+	}
+	else{
+		mNavigationBarHeight.setEnabled(true);
+		mNavigationBarWidth.setEnabled(true);
+		mNavigationRing.setEnabled(true);
+		mNavigationBar.setEnabled(true);
+	}
     }
 
     private void updateExpandedDesktop(int value) {
