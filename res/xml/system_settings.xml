@@ -19,8 +19,10 @@
     android:title="@string/system_interface_title"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
-    <PreferenceScreen android:key="kang_logo"
-        android:layout="@layout/logo_row" />
+    <PreferenceScreen 
+        android:key="kang_logo"
+        android:title="@string/kang_title" 
+	android:fragment="com.android.settings.cyanogenmod.AboutKang" />
 
     <PreferenceScreen
         android:key="status_bar"
@@ -129,6 +131,7 @@
         android:title="@string/ram_bar_note_title"
         android:summary="@string/ram_bar_note_summary"
         android:selectable="false" />
+
     <ListPreference
         android:key="ram_bar_mode"
         android:dialogTitle="@string/ram_bar_mode_dialog_title"

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/system_interface_title"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+
+    <PreferenceScreen 
+        android:key="kang_logo"
+        android:layout="@layout/logo_row" 
+	android:selectable="false" />
+
+    <Preference
+        style="?android:preferenceInformationStyle"
+        android:title="@string/kang_note_title"
+        android:summary="@string/kang_note_summary"
+        android:selectable="false" />
+
+  <PreferenceCategory
+    android:title="@string/source_links">
+
+    <PreferenceScreen 
+        android:key="xda_kang_source"
+        android:title="@string/xda_kang" />
+
+    <PreferenceScreen
+        android:title="@string/github_kang"
+        android:key="github_kang_source" />
+
+    <PreferenceScreen
+        android:title="@string/goo_kang"
+        android:key="goo_kang_source" />
+
+  </PreferenceCategory>
+
+  <PreferenceCategory
+    android:title="@string/kang_cred">
+
+    <PreferenceScreen
+        android:title="@string/kang_credmain"
+        android:key="kang_credmain" />
+
+    <PreferenceScreen
+        android:title="@string/kang_cred1"
+        android:key="kang_cred1" />
+
+    <PreferenceScreen
+        android:title="@string/kang_cred2"
+        android:key="kang_cred2" />
+
+    <PreferenceScreen
+        android:title="@string/kang_cred3"
+        android:key="kang_cred3" />
+
+    <PreferenceScreen
+        android:title="@string/kang_cred4"
+        android:key="kang_cred4" />
+
+    <PreferenceScreen
+        android:title="@string/kang_cred5"
+        android:key="kang_cred5" />
+
+    <PreferenceScreen
+        android:title="@string/kang_cred6"
+        android:key="kang_cred6" />
+
+    <PreferenceScreen
+        android:title="@string/kang_cred7"
+        android:key="kang_cred7" />
+
+    <PreferenceScreen
+        android:title="@string/kang_cred8"
+        android:key="kang_cred8" />
+
+    <PreferenceScreen
+        android:title="@string/kang_cred9"
+        android:key="kang_cred9" />
+
+    <PreferenceScreen
+        android:title="@string/kang_cred10"
+        android:key="kang_cred10" />
+
+    <PreferenceScreen
+        android:title="@string/kang_cred11"
+        android:key="kang_cred11" />
+
+    <PreferenceScreen
+        android:title="@string/kang_cred12"
+        android:key="kang_cred12" />
+
+  </PreferenceCategory>
+
+</PreferenceScreen>
