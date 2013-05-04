@@ -199,7 +199,7 @@ public class SystemSettings extends SettingsPreferenceFragment  implements
         mExpandedDesktopNoNavbarPref = (CheckBoxPreference) findPreference(KEY_EXPANDED_DESKTOP_NO_NAVBAR);
 
         int expandedDesktopValue = Settings.System.getInt(getContentResolver(),
-                Settings.System.EXPANDED_DESKupdateNavigationBarOptions();TOP_STYLE, 0);
+                Settings.System.EXPANDED_DESKTOP_STYLE, 0);
 
         // Hide no-op "Status bar visible" mode on devices without navbar
         try {
