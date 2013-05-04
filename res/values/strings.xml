@@ -4385,7 +4385,7 @@
     <string name="kang_version">JellyKang version</string>
     <string name="kang_version_default">Unknown</string>
 
-    <string name="header_category_kang">Kangaroo!</string>
+    <string name="header_category_kang">JellyKang</string>
 
     <string name="custom_carrier_label_title">Custom carrier label</string>
     <string name="custom_carrier_label_explain">Please enter a new label Or leave blank for stock.</string>
@@ -4502,8 +4502,7 @@ rience. Enable at your own discretion.</string>
     <string name="hidden_statusbar_pulldown_title">Hidden Statusbar Pulldown</string>
     <string name="hidden_statusbar_pulldown_summary">Allows Statusbar to be pulled down when hidden</string>
 
-    <string name="navigation_bar_height">Button height</string>
-    <string name="navigation_bar_height_summary">In portrait</string>
+    <string name="navigation_bar_height">Button height - Portrait</string>
     <string name="navigation_bar_height_48">48dp (default)</string>
     <string name="navigation_bar_height_47">47dp</string>
     <string name="navigation_bar_height_46">46dp</string>
@@ -4520,8 +4519,7 @@ rience. Enable at your own discretion.</string>
     <string name="navigation_bar_height_35">35dp</string>
 
 
-    <string name="navigation_bar_width">Button Height</string>
-    <string name="navigation_bar_width_summary">In landscape</string>
+    <string name="navigation_bar_width">Button Height - Landscape</string>
     <string name="navigation_bar_width_48">48dp</string>
     <string name="navigation_bar_width_47">47dp</string>
     <string name="navigation_bar_width_46">46dp</string>
