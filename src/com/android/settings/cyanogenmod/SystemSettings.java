@@ -199,7 +199,7 @@ public class SystemSettings extends SettingsPreferenceFragment  implements
         mExpandedDesktopNoNavbarPref = (CheckBoxPreference) findPreference(KEY_EXPANDED_DESKTOP_NO_NAVBAR);
 
         int expandedDesktopValue = Settings.System.getInt(getContentResolver(),
-                Settings.System.EXPANDED_DESKTOP_STYLE, 0);
+                Settings.System.EXPANDED_DESKupdateNavigationBarOptions();TOP_STYLE, 0);
 
         // Hide no-op "Status bar visible" mode on devices without navbar
         try {
@@ -267,6 +267,8 @@ public class SystemSettings extends SettingsPreferenceFragment  implements
                  Settings.System.NAVIGATION_BAR_WIDTH, 42);
         mNavigationBarWidth.setValue(String.valueOf(statusNavigationBarWidth));
         mNavigationBarWidth.setSummary(mNavigationBarWidth.getEntry());
+
+	updateNavigationBarOptions();
 
         // Don't display the lock clock preference if its not installed
         removePreferenceIfPackageNotInstalled(findPreference(KEY_LOCK_CLOCK));
@@ -413,9 +415,13 @@ public class SystemSettings extends SettingsPreferenceFragment  implements
     }
 
     private void updateNavigationBarOptions() {
+	PreferenceScreen prefScreen = getPreferenceScreen();
 	PreferenceCategory NavBarCategory = (PreferenceCategory) prefScreen.findPreference(KEY_NAVIGATION_BAR_CATEGORY);
         mNavigationRing = (Preference) findPreference(KEY_NAVIGATION_RING);
 	mNavigationBar = (Preference) findPreference(KEY_NAVIGATION_BAR);
+
+	boolean hasNavBarByDefault = getResources().getBoolean(
+                com.android.internal.R.bool.config_showNavigationBar);
 	
 	if(Settings.System.getBoolean(getActivity().getContentResolver(), Settings.System.NAVIGATION_BAR_SHOW, hasNavBarByDefault) == false){
 		//Don't show NavBar customization if the navbar isn't enabled
