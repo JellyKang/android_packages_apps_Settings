@@ -92,6 +92,7 @@ public class BootReceiver extends BroadcastReceiver {
                              ((availableFrequenciesLine == null) || ((minFrequency == null) && (maxFrequency == null)));
         List<String> frequencies = null;
         List<String> governors = null;
+	String tempcpustring;
 
         if (noSettings) {
             Log.d(TAG, "No CPU settings saved. Nothing to restore.");
@@ -125,7 +126,6 @@ public class BootReceiver extends BroadcastReceiver {
                         break;
                 }
             }
-            String tempcpustring;
             if (governor != null && governors != null && governors.contains(governor)) {
                 Utils.fileWriteOneLine(Processor.GOV_FILE, governor);
                 //this code to properly set the parameters to all cores on Qualcomm Snapdragon cpus
