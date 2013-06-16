@@ -74,11 +74,19 @@
         </PreferenceScreen>
         -->
 
-        <PreferenceScreen
-                android:key="regulatory_info"
-                android:title="@string/regulatory_information">
-            <intent android:action="android.settings.SHOW_REGULATORY_INFO" />
-        </PreferenceScreen>
+ 	<PreferenceScreen 
+		android:key="kang_logo"
+		android:title="@string/kang_title" 
+		android:fragment="com.android.settings.kang.AboutKang" />
+
+	<PreferenceScreen
+		android:key="regulatory_info"
+		android:title="@string/regulatory_information">
+		<intent android:action="android.settings.SHOW_REGULATORY_INFO" />
+	</PreferenceScreen>
+
+        <com.android.settings.RegulatoryInfoPreference android:key="regulatory_info"
+                android:title="@string/regulatory_information" />
 
         <!-- Device hardware model -->
         <Preference android:key="device_model" 
