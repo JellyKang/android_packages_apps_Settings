@@ -104,7 +104,7 @@
 
     <!-- INTERFACE Settings  -->
     <!-- Settings main menu category heading. Rom (Launcher, Themes, System). [CHAR LIMIT=40] -->
-    <string name="header_category_rom_settings">ADVANCED SETTINGS</string>
+    <string name="header_category_rom_settings">KANG SETTINGS</string>
     <string name="ok">OK</string>
 
     <!-- Slim settings screens -->
@@ -524,7 +524,7 @@
     <string name="low_battery_warning_policy_disabled">Disabled</string>
 
     <!-- TRDS Settings -->
-    <string name="trds_settings_title">The Real Dark Slim</string>
+    <string name="trds_settings_title">The Real Dark OS</string>
 
     <!-- LCD Density -->
     <string name="dpi">DPI</string>
@@ -1344,8 +1344,8 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="auto_hide_statusbar_all">All Notifications</string>
 
     <!-- Quick/Pie Control -->
-    <string name="pie_control_title">SlimPIE</string>
-    <string name="pie_control_dialog_title">SlimPIE</string>
+    <string name="pie_control_title">PIE</string>
+    <string name="pie_control_dialog_title">PIE</string>
     <string name="pie_control_always">Show always</string>
     <string name="pie_control_expanded">Only on expanded desktop mode</string>
     <string name="pie_control_disabled">Disabled</string>
