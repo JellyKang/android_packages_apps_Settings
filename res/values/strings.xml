@@ -5975,4 +5975,38 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <!-- Delete apn confirmation dialog message -->
     <string name="confirm_delete_apn">The APN will be deleted.</string>
 
+    <!-- **** JELLYKANG ADDITIONS BEGIN **** -->
+
+    <!-- About phone screen,  setting option name-->
+    <string name="kang_version">JellyKang version</string>
+    <string name="kang_version_default">Unknown</string>
+
+    <string name="header_category_kang">JellyKang</string>
+
+    <string name="kang_note_title">About</string>
+    <string name="kang_note_summary">This ROM is a total KangBang of all MSM8660\'s CM10.1 work, with the addition with WildKernel Reloaded. This features CM 10.1 built from source w/ my custom additions/tweaks from all around (JB MashUp).</string>
+
+    <string name="kang_title">Kangaroo!</string>
+
+    <string name="source_links">Links</string>
+    <string name="github_kang">Github</string>
+    <string name="xda_kang">XDA</string>
+    <string name="goo_kang">Goo</string>
+    <string name="kang_cred">Credits</string>   
+    <string name="kang_credmain">Xmc WildChild22</string>    
+    <string name="kang_cred1">SilverL</string>
+    <string name="kang_cred2">Scverhagen</string>
+    <string name="kang_cred3">CyanogenMod</string>
+    <string name="kang_cred4">Code Aurora</string>
+    <string name="kang_cred5">Team Hydra</string>
+    <string name="kang_cred6">Bruce2728</string>
+    <string name="kang_cred7">Evervolv</string>
+    <string name="kang_cred8">LiquidSmooth</string>
+    <string name="kang_cred9">CarbonDev</string>
+    <string name="kang_cred10">SlimRoms</string>
+    <string name="kang_cred11">RootWebGod</string>
+    <string name="kang_cred12">Overhauling</string>
+
+    <!-- **** JELLYKANG ADDITIONS END **** -->
+
 </resources>

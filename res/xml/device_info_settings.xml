@@ -74,6 +74,11 @@
         </PreferenceScreen>
         -->
 
+ 	<PreferenceScreen 
+        	android:key="kang_logo"
+        	android:title="@string/kang_title" 
+  	android:fragment="com.android.settings.kang.AboutKang" />
+
         <com.android.settings.RegulatoryInfoPreference android:key="regulatory_info"
                 android:title="@string/regulatory_information" />
 
