@@ -51,6 +51,7 @@ import android.graphics.Rect;
 import android.net.wimax.WimaxHelper;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.MultiSelectListPreference;
@@ -87,10 +88,10 @@ import com.android.settings.widget.SeekBarPreference;
 import net.margaritov.preference.colorpicker.ColorPickerView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
-import static com.android.internal.util.cm.QSUtils.deviceSupportsMobileData;
-
 public class AboutKang extends SettingsPreferenceFragment implements Preference.OnPreferenceChangeListener {
     private static final String TAG = "AboutKang";
+
+    private static final String KEY_KANG_VERSION = "kang_version";
 
     private PreferenceScreen mGitUrl;
     private PreferenceScreen mXdaUrl;
@@ -121,6 +122,8 @@ public class AboutKang extends SettingsPreferenceFragment implements Preference.
 
         PreferenceScreen prefSet = getPreferenceScreen();
         mActivity = getActivity();
+
+  	setValueSummary(KEY_KANG_VERSION, "ro.kang.version");
 
         mGitUrl = (PreferenceScreen) findPreference("github_kang_source");
         mXdaUrl = (PreferenceScreen) findPreference("xda_kang_source");
@@ -212,6 +215,16 @@ public class AboutKang extends SettingsPreferenceFragment implements Preference.
         Uri uriUrl = Uri.parse(url);
         Intent donate = new Intent(Intent.ACTION_VIEW, uriUrl);
         getActivity().startActivity(donate);
+    }
+
+    private void setValueSummary(String preference, String property) {
+        try {
+            findPreference(preference).setSummary(
+                    SystemProperties.get(property,
+                            getResources().getString(R.string.device_info_default)));
+        } catch (RuntimeException e) {
+            // No recovery
+        }
     }
      
 }
