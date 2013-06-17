@@ -4915,7 +4915,7 @@
     <string name="low_battery_warning_policy_disabled">Disabled</string>
 
     <!-- TRDS Settings -->
-    <string name="trds_settings_title">The Real Dark OS</string>
+    <string name="trds_settings_title">Dark OS</string>
 
     <!-- LCD Density -->
     <string name="dpi">DPI</string>
@@ -5178,7 +5178,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="notification_style_title">Notification drawer style</string>
     <string name="notification_style_summary">Change your notification drawer style</string>
     <string name="notification_widgets">Widgets</string>
-    <string name="notification_show_wifi_ssid_title">Show Wifi network name</string>
+    <string name="notification_show_wifi_ssid_title">Wifi Label</string>
     <string name="notification_show_wifi_ssid_summary">Display the name of the currently connected Wifi network</string>
 
     <!-- Notification drawer background -->
@@ -5247,13 +5247,13 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="quick_pulldown_off">Off</string>
     <string name="quick_pulldown_left">Left</string>
     <string name="quick_pulldown_right">Right</string>
-    <string name="title_collapse_panel">Auto close panel on change</string>
+    <string name="title_collapse_panel">Auto Close</string>
     <string name="summary_collapse_panel">Close the Quick Settings panel upon toggle</string>
     <string name="disable_quick_settings_panel">Quick Settings</string>
     <string name="disable_quick_settings_panel_summary">Enable or disable Quick Settings</string>
     <string name="quick_settings_enabled">Enabled</string>
     <string name="quick_settings_disabled">Disabled</string>
-    <string name="title_no_notifications_pulldown">Quick pulldown without notifications</string>
+    <string name="title_no_notifications_pulldown">Auto QS</string>
     <string name="summary_no_notifications_pulldown">Pulldown quick settings if no notifications are present</string>
 
     <!-- QuickSettings style options -->
@@ -5263,9 +5263,9 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="tiles_per_row_title">Tiles per row</string>
     <string name="tiles_per_row_duplicate_landscape_title">Scale landscape quantity</string>
     <string name="tiles_per_row_duplicate_landscape_summary">Landscape view doubles tiles per row quantity</string>
-    <string name="quick_tiles_bg_color_title">Tiles background color</string>
-    <string name="quick_tiles_bg_pressed_color_title">Tiles pressed background color</string>
-    <string name="quick_tiles_text_color_title">Tiles text color</string>
+    <string name="quick_tiles_bg_color_title">Tile\'s background color</string>
+    <string name="quick_tiles_bg_pressed_color_title">Tile\'s pressed color</string>
+    <string name="quick_tiles_text_color_title">Tile\'s text color</string>
     <string name="quick_settings_style_reset">Reset colors</string>
 
     <!-- Reset tiles -->
@@ -5315,7 +5315,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
 
     <!-- Keyboard and Input ASS methods  -->
     <string name="title_keyboard_input">Keyboard and input methods</string>
-    <string name="disable_fullscreen_keyboard_title">Disable fullscreen keyboard</string>
+    <string name="disable_fullscreen_keyboard_title">Disable full keyboard</string>
     <string name="disable_fullscreen_keyboard_summary">Landscape keyboard will never take up entire screen</string>
     <string name="volume_key_cursor_control_title">Volume key cursor control</string>
     <string name="volume_key_cursor_control_off">Disabled</string>

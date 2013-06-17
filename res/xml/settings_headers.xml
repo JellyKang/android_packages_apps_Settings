@@ -67,20 +67,6 @@
         android:fragment="com.android.settings.slim.InterfaceSettings"
         android:title="@string/interface_settings_title" />
 
-    <!-- Profiles -->
-    <header
-        android:id="@+id/profiles_settings"
-        android:icon="@drawable/ic_settings_profiles"
-        android:fragment="com.android.settings.profiles.ProfilesSettings"
-        android:title="@string/profiles_settings_title" />
-
-    <!-- Quiet hours -->
-    <header
-        android:id="@+id/quiet_hours_settings"
-        android:icon="@drawable/ic_settings_quiet_hours"
-        android:fragment="com.android.settings.slim.QuietHours"
-        android:title="@string/quiet_hours_title" />
-
     <!-- Themes -->
     <header
         android:id="@+id/themes_settings"
@@ -98,30 +84,6 @@
         android:icon="@drawable/ic_settings_trds"
         android:title="@string/trds_settings_title" />
 
-    <!-- SlimCenter -->
-    <header
-        android:id="@+id/slim_center"
-        android:title="@string/slim_center_title"
-        android:icon="@drawable/ic_settings_slimcenter">
-        <intent
-            android:action="android.intent.action.MAIN"
-            android:targetPackage="com.slim.ota"
-            android:targetClass="com.slim.center.SlimCenter" />
-    </header>
-
-    <header android:title="@string/header_category_rom_system_settings" />
-
-    <!-- DeviceParts Device Specific settings -->
-    <header
-        android:id="@+id/advanced_settings"
-        android:title="@string/advanced_settings_title"
-        android:icon="@drawable/ic_settings_advanced">
-        <intent
-            android:action="com.cyanogenmod.action.LAUNCH_DEVICE_SETTINGS"
-            android:targetPackage="com.cyanogenmod.settings.device"
-            android:targetClass="com.cyanogenmod.settings.device.DeviceSettings" />
-    </header>
-
     <!-- Performance -->
     <header
         android:id="@+id/performance_settings"
@@ -135,6 +97,31 @@
         android:fragment="com.koushikdutta.superuser.PolicyNativeFragment"
         android:icon="@drawable/ic_action_permission"
         android:title="@string/superuser" />
+
+    <!-- Profiles -->
+    <header
+        android:id="@+id/profiles_settings"
+        android:icon="@drawable/ic_settings_profiles"
+        android:fragment="com.android.settings.profiles.ProfilesSettings"
+        android:title="@string/profiles_settings_title" />
+
+    <!-- Quiet hours -->
+    <header
+        android:id="@+id/quiet_hours_settings"
+        android:icon="@drawable/ic_settings_quiet_hours"
+        android:fragment="com.android.settings.slim.QuietHours"
+        android:title="@string/quiet_hours_title" />
+
+    <!-- DeviceParts Device Specific settings -->
+    <header
+        android:id="@+id/advanced_settings"
+        android:title="@string/advanced_settings_title"
+        android:icon="@drawable/ic_settings_advanced">
+        <intent
+            android:action="com.cyanogenmod.action.LAUNCH_DEVICE_SETTINGS"
+            android:targetPackage="com.cyanogenmod.settings.device"
+            android:targetClass="com.cyanogenmod.settings.device.DeviceSettings" />
+    </header>
 
     <!-- DEVICE -->
     <header android:id="@+id/device_section"
