@@ -92,6 +92,8 @@ public class AboutKang extends SettingsPreferenceFragment implements Preference.
     private static final String TAG = "AboutKang";
 
     private static final String KEY_KANG_VERSION = "kang_version";
+    private static final String KEY_KANG_TYPE = "kang_type";
+    private static final String KEY_KANG_DATE = "kang_date";
 
     private PreferenceScreen mGitUrl;
     private PreferenceScreen mXdaUrl;
@@ -124,6 +126,8 @@ public class AboutKang extends SettingsPreferenceFragment implements Preference.
         mActivity = getActivity();
 
   	setValueSummary(KEY_KANG_VERSION, "ro.kang.version");
+  	setValueSummary(KEY_KANG_TYPE, "ro.kang.type");
+  	setValueSummary(KEY_KANG_DATE, "ro.kang.date");
 
         mGitUrl = (PreferenceScreen) findPreference("github_kang_source");
         mXdaUrl = (PreferenceScreen) findPreference("xda_kang_source");

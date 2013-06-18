@@ -30,12 +30,28 @@
         android:summary="@string/kang_note_summary"
         android:selectable="false" />
 
-        <!-- Kang version -->
-        <Preference android:key="kang_version"
-                style="?android:preferenceInformationStyle"
-                android:title="@string/kang_version"
-                android:summary="@string/kang_version_default" 
-		 android:selectable="false" />
+        <!-- Kang Info -->
+    <Preference 
+	android:key="kang_version"
+        style="?android:preferenceInformationStyle"
+        android:title="@string/kang_version"
+        android:summary="@string/kang_version_default" 
+	android:selectable="false" />
+
+    <Preference 
+	android:key="kang_type"
+        style="?android:preferenceInformationStyle"
+        android:title="@string/kang_type"
+        android:summary="@string/kang_version_default" 
+	android:selectable="false" />
+
+    <Preference 
+	android:key="kang_date"
+        style="?android:preferenceInformationStyle"
+        android:title="@string/kang_date"
+        android:summary="@string/kang_version_default" 
+	android:selectable="false" />
+
 
   <PreferenceCategory
     android:title="@string/source_links">

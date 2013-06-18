@@ -4539,8 +4539,10 @@
 <!-- **** JELLYKANG ADDITIONS BEGIN **** -->
 
     <!-- About phone screen,  setting option name-->
-    <string name="kang_version">JellyKang version</string>
+    <string name="kang_version">Version</string>
     <string name="kang_version_default">Unknown</string>
+    <string name="kang_date">Build Date</string>
+    <string name="kang_type">Build Type</string>
 
     <string name="header_category_kang">JellyKang</string>
 
