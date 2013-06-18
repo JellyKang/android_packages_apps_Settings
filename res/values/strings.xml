@@ -3685,6 +3685,10 @@
          [CHAR LIMIT=40] -->
     <string name="sound_category_system_title">System</string>
 
+    <!-- Category title for headset specific Settings.
+         [CHAR LIMIT=40] -->
+    <string name="headset_category_title">Headset</string>
+
     <!-- Wifi Setup For Setup Wizard with XL screen -->
     <!-- Title shown in Wifi Setup Wizard with XL screen -->
     <string name="wifi_setup_title">Wi-Fi setup</string>
@@ -4397,6 +4401,11 @@
 
     <!-- Label for are-notifications-enabled checkbox in app details [CHAR LIMIT=20] -->
     <string name="app_notifications_switch_label">Show notifications</string>
+    <!-- Label for are-notifications-enabled checkbox in app details [CHAR LIMIT=20] -->
+    <string name="halo_header">Halo Settings</string>
+    <string name="halo_settings">Halo</string>
+    <string name="app_halo_label_black">Blacklist HALO notifications</string>
+    <string name="app_halo_label_white">Whitelist HALO notifications</string>
 
     <!--  Help URLs for some screens. Not specified here. Specified in product overlays --><skip/>
     <!-- Help menu label [CHAR LIMIT=20] -->
@@ -4773,6 +4782,9 @@
     <string name="power_menu_screenshot_title">Screenshot</string>
     <string name="power_menu_expanded_desktop">Expanded desktop</string>
     <string name="power_menu_profiles_title">Profile switcher</string>
+    <string name="power_menu_profiles_disabled">Disabled</string>
+    <string name="power_menu_profiles_lock">Disabled on lockscreen</string>
+    <string name="power_menu_profiles_all">Always show</string>
     <string name="power_menu_airplane_title">Airplane mode</string>
     <string name="power_menu_sound_title">Sound panel</string>
     <string name="summary_expanded_desktop">%1$s</string>
@@ -4814,6 +4826,7 @@
     <string name="sound_title">Sound</string>
     <string name="volbtn_music_controls_title">Volume rocker music controls</string>
     <string name="volbtn_music_controls_summary">When screen off, long-pressing the volume rockers will seek music tracks</string>
+    <string name="headset_connect_player_title">Launch music app on connect</string>
     <!-- Sound settings screen, setting check box label -->
     <string name="volume_adjust_sounds_enable_title">Volume adjustment sound</string>
     <!-- Sound settings screen, setting check box summary -->
@@ -4826,6 +4839,20 @@
     <!-- Less Notification sounds -->
     <string name="less_notification_sounds_title">Less frequent notification sounds</string>
     <string name="less_notification_sounds_summary">Limit the notification sounds of each app to only play once per set time period</string>
+
+    <!-- HALO -->
+    <string name="halo_enabled_title">Enable HALO</string>
+    <string name="halo_enabled_summary">If checked enable HALO feature (floating window on recent apps would not be affected)</string>     
+    <string name="halo_hide_title">Hide HALO after activity</string>
+    <string name="halo_hide_summary">HALO will appear for incoming tasks and scroll out of sight after a while</string>
+    <string name="halo_reversed_title">Reverse HALO gestures</string>
+    <string name="halo_reversed_summary">Applies tasking or dragging to the double-tap-swipe gesture</string>
+    <string name="halo_state_title">HALO policy</string>
+    <string name="halo_state_summary">For black/white-listing notifications pinging through HALO</string>
+    <string name="halo_state_black">Black list</string>
+    <string name="halo_state_white">White list</string>
+    <string name="halo_pause_title">HALO pause active app</string>
+    <string name="halo_pause_summary">When opening an app with HALO the underlying app will get paused (enabled by default on low memory devices)</string>
 
     <!-- Category title for power sound notification specific Settings.
          [CHAR LIMIT=40] -->
@@ -5974,6 +6001,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
 
     <!-- Delete apn confirmation dialog message -->
     <string name="confirm_delete_apn">The APN will be deleted.</string>
+
+    <!-- Statusbar Quick Peek -->
+    <string name="statusbar_quick_peek_title">Quick Peek</string>
+    <string name="statusbar_quick_peek_summary">Peek at statusbar by swiping from top edge of screen</string>
 
     <!-- **** JELLYKANG ADDITIONS BEGIN **** -->
 
