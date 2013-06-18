@@ -6007,6 +6007,8 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="kang_cred11">RootWebGod</string>
     <string name="kang_cred12">Overhauling</string>
 
+    <string name="launcher_settings_title">Launcher</string>
+
     <!-- **** JELLYKANG ADDITIONS END **** -->
 
 </resources>
