@@ -4782,6 +4782,9 @@
     <string name="power_menu_screenshot_title">Screenshot</string>
     <string name="power_menu_expanded_desktop">Expanded desktop</string>
     <string name="power_menu_profiles_title">Profile switcher</string>
+    <string name="power_menu_profiles_disabled">Disabled</string>
+    <string name="power_menu_profiles_lock">Disabled on lockscreen</string>
+    <string name="power_menu_profiles_all">Always show</string>
     <string name="power_menu_airplane_title">Airplane mode</string>
     <string name="power_menu_sound_title">Sound panel</string>
     <string name="summary_expanded_desktop">%1$s</string>
@@ -5998,5 +6001,9 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
 
     <!-- Delete apn confirmation dialog message -->
     <string name="confirm_delete_apn">The APN will be deleted.</string>
+
+    <!-- Statusbar Quick Peek -->
+    <string name="statusbar_quick_peek_title">Quick Peek</string>
+    <string name="statusbar_quick_peek_summary">Peek at statusbar by swiping from top edge of screen</string>
 
 </resources>
