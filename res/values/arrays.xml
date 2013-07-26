@@ -1053,10 +1053,39 @@
         <item>Enable</item>
     </string-array>
 
+    <!-- Profile 2G-3G mode options. -->
+    <string-array name="profile_networkmode_entries" translatable="false">
+        <item>@string/profile_networkmode_2g</item>
+        <item>@string/profile_networkmode_3g</item>
+        <item>@string/profile_networkmode_2g3g</item>
+    </string-array>
+
     <!-- Values for profile connections. Do not translate. -->
     <string-array name="profile_connection_values" translatable="false">
         <item>0</item>
         <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!--  Values for profile Wi-Fi triggers -->
+    <string-array name="profile_trigger_wifi_options" translatable="false">
+        <item>@string/profile_trigger_connect</item>
+        <item>@string/profile_trigger_disconnect</item>
+        <item>@string/profile_trigger_notrigger</item>
+    </string-array>
+
+    <!--  Values for profile trigger types -->
+    <string-array name="profile_trigger_filters" translatable="false">
+        <item>@string/profile_trigger_filter_all</item>
+        <item>@string/profile_trigger_filter_wifi</item>
+        <item>@string/profile_trigger_filter_bluetooth</item>
+    </string-array>
+
+    <!-- Profile lock mode options. Do not translate. -->
+    <string-array name="profile_lockmode_entries" translatable="false">
+        <item>@string/profile_lockmode_default</item>
+        <item>@string/profile_lockmode_insecure</item>
+        <item>@string/profile_lockmode_disabled</item>
     </string-array>
 
     <!-- Profile lock mode options. Do not translate. -->
@@ -1480,13 +1509,39 @@
     </string-array>
 
     <!-- Quick pulldown -->
-    <string-array name="quick_pulldown_entries" translatable="false">
+    <string-array name="quick_pulldown_entries">
         <item>@string/quick_pulldown_off</item>
         <item>@string/quick_pulldown_right</item>
         <item>@string/quick_pulldown_left</item>
     </string-array>
 
     <string-array name="quick_pulldown_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- No Notifications pulldown -->
+    <string-array name="no_notifications_pulldown_entries">
+        <item>@string/no_notifications_pulldown_off</item>
+        <item>@string/no_notifications_pulldown_nonperm</item>
+        <item>@string/no_notifications_pulldown_all</item>
+    </string-array>
+
+    <string-array name="no_notifications_pulldown_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- AutoHide StatusBar -->
+    <string-array name="entries_auto_hide_statusbar">
+        <item>@string/auto_hide_statusbar_off</item>
+        <item>@string/auto_hide_statusbar_nonperm</item>
+        <item>@string/auto_hide_statusbar_all</item>
+    </string-array>
+
+    <string-array name="values_auto_hide_statusbar" translatable="false">
         <item>0</item>
         <item>1</item>
         <item>2</item>
@@ -1886,7 +1941,9 @@
         <item>@string/custom_app</item>
         <item>@string/kill_app</item>
         <item>@string/lastapp</item>
+        <item>@string/notifications</item>
         <item>@string/open_ime_switcher</item>
+        <item>@string/quicksettings</item>
         <item>@string/ring_silent</item>
         <item>@string/ring_vib</item>
         <item>@string/ring_vib_silent</item>
@@ -1901,7 +1958,9 @@
         <item>**app**</item>
         <item>**kill**</item>
         <item>**lastapp**</item>
+        <item>**notifications**</item>
         <item>**ime**</item>
+        <item>**quicksettings**</item>
         <item>**ring_silent**</item>
         <item>**ring_vib**</item>
         <item>**ring_vib_silent**</item>
@@ -2164,16 +2223,16 @@
     </string-array>
 
     <string-array name="less_notification_sounds_entries">
-        <item>Default Behaviour</item>
-        <item>3s</item>
-        <item>5s</item>
-        <item>10s</item>
-        <item>15s</item>
-        <item>30s</item>
-        <item>45s</item>
-        <item>1m</item>
-        <item>2m</item>
-        <item>5m</item>
+        <item>@string/less_notification_sounds_default</item>
+        <item>@string/less_notification_sounds_3s</item>
+        <item>@string/less_notification_sounds_5s</item>
+        <item>@string/less_notification_sounds_10s</item>
+        <item>@string/less_notification_sounds_15s</item>
+        <item>@string/less_notification_sounds_30s</item>
+        <item>@string/less_notification_sounds_45s</item>
+        <item>@string/less_notification_sounds_1m</item>
+        <item>@string/less_notification_sounds_2m</item>
+        <item>@string/less_notification_sounds_5m</item>
     </string-array>
 
     <string-array name="less_notification_sounds_values" translatable="false">
@@ -2364,4 +2423,18 @@
         <item>1</item>
         <item>0</item>
     </string-array>
+
+    <!-- Wake on button -->
+    <string-array name="entries_wakeon_button">
+        <item>@string/wakeon_button_power</item>
+        <item>@string/wakeon_button_home</item>
+        <item>@string/wakeon_button_both</item>
+    </string-array>
+
+    <string-array name="values_wakeon_button" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
 </resources>
