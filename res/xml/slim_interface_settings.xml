@@ -46,12 +46,6 @@
 
     </PreferenceScreen>
 
-    <PreferenceScreen
-        android:id="@+id/bootbox"
-        android:fragment="com.overhaulingmod.bootbox"
-        android:icon="@drawable/ic_bootbox"
-        android:title="@string/bootbox_title" />
-
     <PreferenceCategory
         android:key="interface_settings_action_prefs"
         android:title="@string/interface_settings_options_title">
