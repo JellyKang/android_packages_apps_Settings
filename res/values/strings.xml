@@ -5929,6 +5929,8 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="icon_color_mode_all_icons">All icons</string>
     <string name="icon_color_mode_system_icons">System icons</string>
     <string name="icon_color_mode_system_custom_icons">System and custom icons</string>
+    <string name="qs_reset">Reset</string>
+    <string name="qs_style_reset_message">Reset all colors to default?</string>
 
     <!-- **** JELLYKANG ADDITIONS BEGIN **** -->
 
