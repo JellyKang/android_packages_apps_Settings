@@ -78,7 +78,7 @@
     <header
         android:id="@+id/launcher_settings"
         android:title="@string/launcher_settings_title"
-        android:icon="@drawable/empty_icon" />
+         android:icon="@drawable/ic_settings_cmlauncher" />
 
     <!-- Navigation -->
     <header
