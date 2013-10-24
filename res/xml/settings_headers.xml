@@ -74,6 +74,12 @@
         android:fragment="com.android.settings.slim.InterfaceSettings"
         android:title="@string/interface_settings_title" />
 
+    <!-- Launcher -->
+    <header
+        android:id="@+id/launcher_settings"
+        android:title="@string/launcher_settings_title"
+        android:icon="@drawable/empty_icon" />
+
     <!-- Navigation -->
     <header
         android:id="@+id/navigation_settings"
@@ -86,17 +92,6 @@
         android:id="@+id/trds_settings"
         android:icon="@drawable/ic_settings_trds"
         android:title="@string/trds_settings_title" />
-
-    <!-- SlimCenter -->
-    <header
-        android:id="@+id/slim_center"
-        android:title="@string/slim_center_title"
-        android:icon="@drawable/ic_settings_slimcenter">
-        <intent
-            android:action="android.intent.action.MAIN"
-            android:targetPackage="com.slim.ota"
-            android:targetClass="com.slim.center.SlimCenter" />
-    </header>
 
     <!-- DEVICE -->
     <header android:id="@+id/device_section"
