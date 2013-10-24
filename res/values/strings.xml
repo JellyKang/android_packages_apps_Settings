@@ -4547,7 +4547,7 @@
     <string name="header_category_kang">JellyKang</string>
 
     <string name="kang_note_title">About</string>
-    <string name="kang_note_summary">This ROM is a total KangBang of all MSM8660\'s CM10.1 work, with the addition with WildKernel Reloaded. This features JellyBean 4.3 built from source w/ my custom additions/tweaks from all around (JB MashUp).</string>
+    <string name="kang_note_summary">This ROM is a total KangBang of all of MSM8660\'s CM10.2 work, with the addition with WildKernel Reloaded. This features JellyBean 4.3 built from source w/ my custom additions/tweaks from all around (JB MashUp).</string>
 
     <string name="kang_title">Kangaroo!</string>
 
